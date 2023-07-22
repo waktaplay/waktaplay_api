@@ -50,7 +50,7 @@ async function getDetailData(): Promise<any> {
         if (x) {
           return {
             ...x,
-            range: x.previous - (index + 1),
+            range: (data.findIndex(y => x.id == y.id) - index),
           }
         }
       })
