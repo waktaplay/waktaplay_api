@@ -11,6 +11,7 @@ import Statistics, { type IStatistics } from '../../models/Statistics'
 import StatisticsDate, { IStatisticsDate } from '../../models/StatisticsDate'
 
 import { type IUsers } from '../../models/Users'
+import { calculateRankingChanges, type IChartCalculation } from '../../utils/chart'
 
 interface IChartsData extends IMusicData {
   previous: number
@@ -25,6 +26,9 @@ async function getDetailData(): Promise<any> {
     const statistics: IStatistics[] = loadJSON(await Statistics.find())
 
     const data: IChartsData[] = []
+
+    const currentRanking: IChartCalculation[] = [];
+    const previousRanking: IChartCalculation[] = [];
     
     statistics.forEach(x => {
       let find = thisWeek.find(
@@ -37,8 +41,13 @@ async function getDetailData(): Promise<any> {
           previous: x.previous_total,
           viewCount: x.total,
         })
+
+        currentRanking.push({ id: x.id, views: x.total })
+        previousRanking.push({ id: x.id, views: x.previous_total })
       }
     })
+
+    const rankingChanges = calculateRankingChanges(previousRanking, currentRanking);
 
     return data
       .sort((a, b) => a.viewCount > b.viewCount ? -1 : (b.viewCount > a.viewCount ? 1 : 0))
@@ -46,11 +55,11 @@ async function getDetailData(): Promise<any> {
       .filter(x => {
         return x
       })
-      .map((x: any, index: number) => {
+      .map(x => {
         if (x) {
           return {
             ...x,
-            range: (data.findIndex(y => x.id == y.id) - index),
+            range: rankingChanges.get(x.id as string),
           }
         }
       })
