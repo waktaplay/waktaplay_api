@@ -7,7 +7,10 @@ import morgan from 'koa-morgan'
 import fs from 'node:fs'
 import path from 'node:path'
 
+import * as dotenv from 'dotenv'
+
 import { color } from './functions/color'
+import { readDeepDir } from './functions/fs'
 
 const app = new Koa()
 const router = new Router()
@@ -17,35 +20,32 @@ const accessLogStream = fs.createWriteStream(
   { flags: 'a' },
 )
 
+dotenv.config()
 app.use(cors())
 app.use(bodyParser())
 app.use(morgan('dev'))
 app.use(morgan('combined', { stream: accessLogStream }))
 
-const routers = fs.readdirSync(path.join(__dirname, 'routers'))
+const routers = readDeepDir(path.join(__dirname, 'routers'))
 
 console.log('------------------------------------')
 
 for (const i in routers) {
-  let pathName = '/'
-
-  if (routers[i] != 'main.ts') {
-    pathName += routers[i]
-  }
+  let pathName = '/' + routers[i]
 
   try {
     router.use(
-      pathName.replace('.ts', ''),
+      pathName.replace('main', '').replace('.ts', ''),
       require(path.join(__dirname, 'routers', routers[i])).routes(),
     )
     console.log(
       color('green', '[Router]'),
-      `${pathName.replace('.ts', '')} (${routers[i]}) ✅`,
+      `${pathName.replace('main', '').replace('.ts', '')} (${routers[i]}) ✅`,
     )
   } catch (error) {
     console.error(
       color('red', '[Router]'),
-      `${pathName.replace('.ts', '')} (${routers[i]}) ❌ -> ${error}`,
+      `${pathName.replace('main', '').replace('.ts', '')} (${routers[i]}) ❌ -> ${error}`,
     )
   }
 }
