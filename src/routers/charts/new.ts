@@ -18,7 +18,7 @@ async function getDetailData(): Promise<any[]> {
     const data: IMusicData[] = loadJSON(await ThisWeek.find())
 
     return data
-      .sort((a, b) => a.uploadDate.getTime() > b.uploadDate.getTime() ? -1 : (b.uploadDate.getTime() > a.uploadDate.getTime() ? 1 : 0))
+      .sort((a, b) => new Date(a.uploadDate).getTime() > new Date(b.uploadDate).getTime() ? -1 : (new Date(b.uploadDate).getTime() > new Date(a.uploadDate).getTime() ? 1 : 0))
       .filter(x => {
         return x
       })
