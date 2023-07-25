@@ -11,13 +11,13 @@ const Users: Model<IUsers> = mongoose.model(
   new mongoose.Schema({
     id: {
       type: String,
-      required: true,
       unique: true,
+      required: true,
     },
     email: {
       type: String,
-      required: true,
       unique: true,
+      required: true,
     },
   }),
 )

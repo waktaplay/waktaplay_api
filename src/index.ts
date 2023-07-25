@@ -40,12 +40,16 @@ for (const i in routers) {
     )
     console.log(
       color('green', '[Router]'),
-      `${pathName.replace('main', '').replace('.ts', '')} (${routers[i]}) ✅`,
+      `${pathName.replace('main', '').replace('.ts', '')} (${
+        routers[i]
+      }) ✅`,
     )
   } catch (error) {
     console.error(
       color('red', '[Router]'),
-      `${pathName.replace('main', '').replace('.ts', '')} (${routers[i]}) ❌ -> ${error}`,
+      `${pathName.replace('main', '').replace('.ts', '')} (${
+        routers[i]
+      }) ❌ -> ${error}`,
     )
   }
 }

@@ -8,10 +8,15 @@ import { errorLog } from '../../functions/error'
 import Hearts from '../../models/Hearts'
 import ThisWeek, { type IMusicData } from '../../models/ThisWeek'
 import Statistics, { type IStatistics } from '../../models/Statistics'
-import StatisticsDate, { IStatisticsDate } from '../../models/StatisticsDate'
+import StatisticsDate, {
+  IStatisticsDate,
+} from '../../models/StatisticsDate'
 
 import { type IUsers } from '../../models/Users'
-import { calculateRankingChanges, type IChartCalculation } from '../../utils/chart'
+import {
+  calculateRankingChanges,
+  type IChartCalculation,
+} from '../../utils/chart'
 
 interface IChartsData extends IMusicData {
   previous: number
@@ -23,16 +28,20 @@ const router = new Router()
 async function getDetailData(): Promise<any> {
   try {
     const thisWeek: IMusicData[] = loadJSON(await ThisWeek.find())
-    const statistics: IStatistics[] = loadJSON(await Statistics.find())
+    const statistics: IStatistics[] = loadJSON(
+      await Statistics.find(),
+    )
 
     const data: IChartsData[] = []
 
-    const currentRanking: IChartCalculation[] = [];
-    const previousRanking: IChartCalculation[] = [];
-    
+    const currentRanking: IChartCalculation[] = []
+    const previousRanking: IChartCalculation[] = []
+
     statistics.forEach(x => {
       let find = thisWeek.find(
-        y => y.videos.video == 'https://youtu.be/' + x.id || y.videos.reaction == 'https://youtu.be/' + x.id,
+        y =>
+          y.videos.video == 'https://youtu.be/' + x.id ||
+          y.videos.reaction == 'https://youtu.be/' + x.id,
       )
 
       if (find) {
@@ -47,10 +56,19 @@ async function getDetailData(): Promise<any> {
       }
     })
 
-    const rankingChanges = calculateRankingChanges(previousRanking, currentRanking);
+    const rankingChanges = calculateRankingChanges(
+      previousRanking,
+      currentRanking,
+    )
 
     return data
-      .sort((a, b) => a.viewCount > b.viewCount ? -1 : (b.viewCount > a.viewCount ? 1 : 0))
+      .sort((a, b) =>
+        a.viewCount > b.viewCount
+          ? -1
+          : b.viewCount > a.viewCount
+          ? 1
+          : 0,
+      )
       .slice(0, 200)
       .filter(x => {
         return x
@@ -64,26 +82,38 @@ async function getDetailData(): Promise<any> {
         }
       })
   } catch (error: any) {
-    await errorLog(error, '/api/music/charts/realtime', process.env.WEBHOOK_URL)
+    await errorLog(
+      error,
+      '/api/music/charts/realtime',
+      process.env.WEBHOOK_URL,
+    )
     throw error
   }
 }
 
 router.all('/', async (ctx, next) => {
   try {
-    const userData = jwt.decode((ctx.headers.authorization as string)?.split("Bearer ")[1] as string) as IUsers
+    const userData = jwt.decode(
+      (ctx.headers.authorization as string)?.split(
+        'Bearer ',
+      )[1] as string,
+    ) as IUsers
 
     let hearts: string[] = []
     if (userData?.id) {
-      hearts = loadJSON(await Hearts.find({ user: userData.id })).map((x: any) => {
-        return x.music
-      })
+      hearts = loadJSON(await Hearts.find({ user: userData.id })).map(
+        (x: any) => {
+          return x.music
+        },
+      )
     }
 
-    const updateDate: IStatisticsDate = loadJSON(await StatisticsDate.findOne())
+    const updateDate: IStatisticsDate = loadJSON(
+      await StatisticsDate.findOne(),
+    )
     const musicOriginData = await getDetailData()
 
-    return ctx.body = {
+    return (ctx.body = {
       status: 200,
       data: musicOriginData.map((x: any) => {
         if (x) {
@@ -94,15 +124,19 @@ router.all('/', async (ctx, next) => {
         }
       }),
       updateDate: updateDate.realtime,
-    }
+    })
   } catch (error: any) {
-    await errorLog(error, '/api/music/charts/realtime', process.env.WEBHOOK_URL)
+    await errorLog(
+      error,
+      '/api/music/charts/realtime',
+      process.env.WEBHOOK_URL,
+    )
 
     ctx.status = 500
-    return ctx.body = {
+    return (ctx.body = {
       status: 500,
       data: error.toString(),
-    }
+    })
   }
 })
 

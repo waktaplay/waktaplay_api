@@ -11,6 +11,7 @@ const Statistics = mongoose.model(
   new mongoose.Schema({
     id: {
       type: String,
+      unique: true,
       required: true,
     },
     realtime: {

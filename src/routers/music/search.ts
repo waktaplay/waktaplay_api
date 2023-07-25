@@ -11,7 +11,10 @@ import ThisWeek from '../../models/ThisWeek'
 
 import { type IUsers } from '../../models/Users'
 import { type IArtist } from '../../models/Artist'
-import { type musicSearchResult, artistSearchResult } from '../../types/search'
+import {
+  type musicSearchResult,
+  artistSearchResult,
+} from '../../types/search'
 
 import { findGroupAliases } from '../../utils/artist'
 
@@ -29,9 +32,13 @@ async function getDetailData(): Promise<any[]> {
         type: x.type,
         title: {
           simple: x.title.simple,
-          simple_trans: x.title.simple.replaceAll(' ', '').toLowerCase(),
+          simple_trans: x.title.simple
+            .replaceAll(' ', '')
+            .toLowerCase(),
           original: x.title.original,
-          original_trans: x.title.original.replaceAll(' ', '').toLowerCase(),
+          original_trans: x.title.original
+            .replaceAll(' ', '')
+            .toLowerCase(),
         },
         videos: x.videos,
         artist: x.artist,
@@ -39,9 +46,15 @@ async function getDetailData(): Promise<any[]> {
       })
     })
 
-    return searchResult.sort((a, b) => b.uploadDate.getTime() - a.uploadDate.getTime())
+    return searchResult.sort(
+      (a, b) => b.uploadDate.getTime() - a.uploadDate.getTime(),
+    )
   } catch (error: any) {
-    await errorLog(error, '/api/music/search', process.env.WEBHOOK_URL)
+    await errorLog(
+      error,
+      '/api/music/search',
+      process.env.WEBHOOK_URL,
+    )
     throw error
   }
 }
@@ -53,40 +66,57 @@ async function getArtistData(): Promise<any[]> {
 
     data.forEach((x: IArtist) => {
       searchResult.push({
-        id: findGroupAliases(x.engName.replaceAll(' ', '').toLowerCase()),
+        id: findGroupAliases(
+          x.engName.replaceAll(' ', '').toLowerCase(),
+        ),
         name: x.name,
         shortName: x.shortName,
         group: x.group,
-        profileImage: '/images/artists/' + findGroupAliases(x.engName.replaceAll(' ', '').toLowerCase()) + '.png',
+        profileImage:
+          '/images/artists/' +
+          findGroupAliases(
+            x.engName.replaceAll(' ', '').toLowerCase(),
+          ) +
+          '.png',
       })
     })
 
-    return searchResult.sort((a, b) => b.id > a.id ? -1 : 1)
+    return searchResult.sort((a, b) => (b.id > a.id ? -1 : 1))
   } catch (error: any) {
-    await errorLog(error, '/api/music/search', process.env.WEBHOOK_URL)
+    await errorLog(
+      error,
+      '/api/music/search',
+      process.env.WEBHOOK_URL,
+    )
     throw error
   }
 }
 
 router.all('/', async (ctx, next) => {
   try {
-    const userData = jwt.decode((ctx.headers.authorization as string)?.split("Bearer ")[1] as string) as IUsers
+    const userData = jwt.decode(
+      (ctx.headers.authorization as string)?.split(
+        'Bearer ',
+      )[1] as string,
+    ) as IUsers
 
     let hearts: string[] = []
     if (userData?.id) {
-      hearts = loadJSON(await Hearts.find({ user: userData.id })).map((x: any) => {
-        return x.music
-      })
+      hearts = loadJSON(await Hearts.find({ user: userData.id })).map(
+        (x: any) => {
+          return x.music
+        },
+      )
     }
 
     if (!ctx.query.q || ctx.query.q == 'undefined') {
-      return ctx.body = {
+      return (ctx.body = {
         status: 200,
         data: {
           artist: [],
           music: [],
         },
-      }
+      })
     }
 
     let musicOriginData = await getDetailData()
@@ -101,37 +131,73 @@ router.all('/', async (ctx, next) => {
 
     const artistResult = artistSearchData.filter((x: any) => {
       return (
-        String(x.id).includes(String(ctx.query.q).replaceAll(' ', '').toLowerCase()) ||
+        String(x.id).includes(
+          String(ctx.query.q).replaceAll(' ', '').toLowerCase(),
+        ) ||
         String(x.name)
           .replaceAll(' ', '')
           .toLowerCase()
-          .includes(String(ctx.query.q).replaceAll(' ', '').toLowerCase()) ||
+          .includes(
+            String(ctx.query.q).replaceAll(' ', '').toLowerCase(),
+          ) ||
         String(x.shortName)
           .replaceAll(' ', '')
           .toLowerCase()
-          .includes(String(ctx.query.q).replaceAll(' ', '').toLowerCase()) ||
+          .includes(
+            String(ctx.query.q).replaceAll(' ', '').toLowerCase(),
+          ) ||
         String(x.group)
           .replaceAll(' ', '')
-          .includes(findGroupAliases(String(ctx.query.q).replaceAll(' ', '').toLowerCase()))
+          .includes(
+            findGroupAliases(
+              String(ctx.query.q).replaceAll(' ', '').toLowerCase(),
+            ),
+          )
       )
     })
 
     const searchResult = musicOriginData.filter((x: any) => {
       return (
-        Boolean(String(x.id_trans).includes(String(ctx.query.q).toLowerCase())) ||
-        Boolean(String(x.title.original_trans).includes(String(ctx.query.q).replaceAll(' ', '').toLowerCase())) ||
-        Boolean(String(x.title.simple_trans).includes(String(ctx.query.q).replaceAll(' ', '').toLowerCase())) ||
+        Boolean(
+          String(x.id_trans).includes(
+            String(ctx.query.q).toLowerCase(),
+          ),
+        ) ||
+        Boolean(
+          String(x.title.original_trans).includes(
+            String(ctx.query.q).replaceAll(' ', '').toLowerCase(),
+          ),
+        ) ||
+        Boolean(
+          String(x.title.simple_trans).includes(
+            String(ctx.query.q).replaceAll(' ', '').toLowerCase(),
+          ),
+        ) ||
         Boolean(
           x.artist[
             originalArtist.filter(y =>
-              y.id.replaceAll(' ', '').toLowerCase().includes(String(ctx.query.q).replaceAll(' ', '').toLowerCase()),
+              y.id
+                .replaceAll(' ', '')
+                .toLowerCase()
+                .includes(
+                  String(ctx.query.q)
+                    .replaceAll(' ', '')
+                    .toLowerCase(),
+                ),
             )[0]?.id
           ],
         ) ||
         Boolean(
           x.artist[
             originalArtist.filter(y =>
-              y.name.replaceAll(' ', '').toLowerCase().includes(String(ctx.query.q).replaceAll(' ', '').toLowerCase()),
+              y.name
+                .replaceAll(' ', '')
+                .toLowerCase()
+                .includes(
+                  String(ctx.query.q)
+                    .replaceAll(' ', '')
+                    .toLowerCase(),
+                ),
             )[0]?.id
           ],
         ) ||
@@ -141,14 +207,25 @@ router.all('/', async (ctx, next) => {
               y.shortName
                 .replaceAll(' ', '')
                 .toLowerCase()
-                .includes(String(ctx.query.q).replaceAll(' ', '').toLowerCase()),
+                .includes(
+                  String(ctx.query.q)
+                    .replaceAll(' ', '')
+                    .toLowerCase(),
+                ),
             )[0]?.id
           ],
         ) ||
         Boolean(
           x.artist[
             originalArtist.filter(y =>
-              y.group.replaceAll(' ', '').toLowerCase().includes(String(ctx.query.q).replaceAll(' ', '').toLowerCase()),
+              y.group
+                .replaceAll(' ', '')
+                .toLowerCase()
+                .includes(
+                  String(ctx.query.q)
+                    .replaceAll(' ', '')
+                    .toLowerCase(),
+                ),
             )[0]?.id
           ],
         )
@@ -165,7 +242,7 @@ router.all('/', async (ctx, next) => {
       })
     })
 
-    return ctx.body = {
+    return (ctx.body = {
       status: 200,
       data: {
         artist: artistResult.sort(function (a, b) {
@@ -178,24 +255,32 @@ router.all('/', async (ctx, next) => {
             if (x) {
               return {
                 ...x,
-                isHearted: hearts.includes(x.videos.video.split('https://youtu.be/')[1]),
+                isHearted: hearts.includes(
+                  x.videos.video.split('https://youtu.be/')[1],
+                ),
               }
             }
           })
           .sort(function (a, b) {
-            if (new Date(a.uploadDate) < new Date(b.uploadDate)) return -1
-            if (new Date(a.uploadDate) > new Date(b.uploadDate)) return 1
+            if (new Date(a.uploadDate) < new Date(b.uploadDate))
+              return -1
+            if (new Date(a.uploadDate) > new Date(b.uploadDate))
+              return 1
             return 0
           }),
       },
-    }
+    })
   } catch (error: any) {
-    await errorLog(error, '/api/music/search', process.env.WEBHOOK_URL)
+    await errorLog(
+      error,
+      '/api/music/search',
+      process.env.WEBHOOK_URL,
+    )
     ctx.status = 500
-    return ctx.body = {
+    return (ctx.body = {
       status: 500,
       data: error.toString(),
-    }
+    })
   }
 })
 

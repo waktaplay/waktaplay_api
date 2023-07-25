@@ -8,16 +8,27 @@ import ThisWeek from '../../models/ThisWeek'
 
 import { findGroupAliases } from '../../utils/artist'
 
-import { type musicSearchResult, type artistSearchResult } from '../../types/search'
+import {
+  type musicSearchResult,
+  type artistSearchResult,
+} from '../../types/search'
 
 const router = new Router()
 
 async function getDetailData(): Promise<any[]> {
   try {
-    const searchResult: musicSearchResult[] = loadJSON(await ThisWeek.find())
-    return searchResult.sort((a, b) => b.uploadDate.getTime() - a.uploadDate.getTime())
+    const searchResult: musicSearchResult[] = loadJSON(
+      await ThisWeek.find(),
+    )
+    return searchResult.sort(
+      (a, b) => b.uploadDate.getTime() - a.uploadDate.getTime(),
+    )
   } catch (error: any) {
-    await errorLog(error, '/api/music/artist', process.env.WEBHOOK_URL)
+    await errorLog(
+      error,
+      '/api/music/artist',
+      process.env.WEBHOOK_URL,
+    )
     throw error
   }
 }
@@ -27,10 +38,10 @@ router.all('/', async (ctx, next) => {
     if (!ctx.query.artist) {
       const artist: any = await Artist.find()
 
-      return ctx.body = {
+      return (ctx.body = {
         status: 200,
         data: artist,
-      }
+      })
     }
 
     const artist: any = await Artist.find()
@@ -38,7 +49,10 @@ router.all('/', async (ctx, next) => {
     let musicOriginData: musicSearchResult[] = await getDetailData()
 
     const artistData: artistSearchResult[] = artist.filter(
-      (x: any) => findGroupAliases(String(x.engName).replaceAll(' ', '').toLowerCase()) === ctx.query.artist,
+      (x: any) =>
+        findGroupAliases(
+          String(x.engName).replaceAll(' ', '').toLowerCase(),
+        ) === ctx.query.artist,
     )
 
     const searchResult = musicOriginData.filter((x: any) => {
@@ -102,32 +116,49 @@ router.all('/', async (ctx, next) => {
       ...musicOriginData.filter((x: any) => {
         if (ctx.query.artist == 'isedol') {
           // 이세계아이돌: 예외처리 (단체로 등록된 음악 추가)
-          return findGroupAliases(x.title.simple.split(' - ')[0]) == 'isedol'
+          return (
+            findGroupAliases(x.title.simple.split(' - ')[0]) ==
+            'isedol'
+          )
         } else if (ctx.query.artist == 'gomem') {
           // 고멤: 예외처리 (단체로 등록된 음악 추가)
-          return findGroupAliases(x.title.simple.split(' - ')[0]) == 'gomem'
+          return (
+            findGroupAliases(x.title.simple.split(' - ')[0]) ==
+            'gomem'
+          )
         } else if (ctx.query.artist == 'gomem-academy') {
           // 아카데미: 예외처리 (단체로 등록된 음악 추가)
-          return findGroupAliases(x.title.simple.split(' - ')[0]) == 'gomem-academy'
+          return (
+            findGroupAliases(x.title.simple.split(' - ')[0]) ==
+            'gomem-academy'
+          )
         }
       }),
     )
 
-    return ctx.body = {
+    return (ctx.body = {
       status: 200,
       data: {
-        artist: artistData.filter((ele, pos) => artistData.indexOf(ele) == pos),
-        music: searchResult.filter((ele, pos) => searchResult.indexOf(ele) == pos),
+        artist: artistData.filter(
+          (ele, pos) => artistData.indexOf(ele) == pos,
+        ),
+        music: searchResult.filter(
+          (ele, pos) => searchResult.indexOf(ele) == pos,
+        ),
       },
-    }
+    })
   } catch (error: any) {
-    await errorLog(error, '/api/music/artist', process.env.WEBHOOK_URL)
+    await errorLog(
+      error,
+      '/api/music/artist',
+      process.env.WEBHOOK_URL,
+    )
 
     ctx.status = 500
-    return ctx.body = {
+    return (ctx.body = {
       status: 500,
       data: error.toString(),
-    }
+    })
   }
 })
 

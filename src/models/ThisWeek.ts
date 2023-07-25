@@ -11,6 +11,7 @@ const ThisWeek = mongoose.model(
   new mongoose.Schema({
     id: {
       type: String,
+      unique: true,
       required: true,
     },
     type: {
@@ -26,7 +27,7 @@ const ThisWeek = mongoose.model(
       original: {
         type: String,
         required: true,
-      }
+      },
     },
     videos: {
       video: {
@@ -37,17 +38,10 @@ const ThisWeek = mongoose.model(
         type: String,
         required: true,
       },
+      artTrack: String || null,
       timeData: {
         start: Number,
         end: Number,
-      },
-      reaction: {
-        type: String,
-        required: true,
-      },
-      etc: {
-        type: String,
-        required: true,
       },
     },
     artist: {
@@ -274,70 +268,4 @@ const ThisWeek = mongoose.model(
   }),
 )
 
-interface IMusicData {
-  id: String
-  type: Number
-  title: {
-    simple: String
-    original: String
-  },
-  videos: {
-    video: String
-    musicVideo: String,
-    timeData: {
-      start: Number
-      end: Number
-    },
-    reaction: String
-    etc: String
-  },
-  artist: {
-    woowakgood: Boolean
-    angel: Boolean
-    messi: Boolean
-    ine: Boolean
-    jingburger: Boolean
-    lilpa: Boolean
-    jururu: Boolean
-    gosegu: Boolean
-    viichan: Boolean
-    chunyang: Boolean
-    chunshik: Boolean
-    kwonmin: Boolean
-    kimchimandu: Boolean
-    nosferatuhodd: Boolean
-    dandapbug: Boolean
-    dopamine: Boolean
-    dokkhye: Boolean
-    roentgenium: Boolean
-    haku: Boolean
-    bujungingan: Boolean
-    secretto: Boolean
-    businesskim: Boolean
-    friedshrimp: Boolean
-    sophia: Boolean
-    wakphago: Boolean
-    leedeoksoo: Boolean
-    carnarjungtur: Boolean
-    callycarly: Boolean
-    pungsin: Boolean
-    freeter: Boolean
-    rusuk: Boolean
-    hikiking: Boolean
-    ninnin: Boolean
-    ballantine: Boolean
-    bulgom: Boolean
-    jentu: Boolean
-    soosemi: Boolean
-    sirianrain: Boolean
-    amadeuschoi: Boolean
-    jinhe: Boolean
-    gilbert: Boolean
-    sullivan: Boolean
-    etc: Boolean
-  },
-  uploadDate: Date
-}
-
 export default ThisWeek
-export { type IMusicData }
