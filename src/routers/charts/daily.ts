@@ -40,8 +40,7 @@ async function getDetailData(): Promise<any> {
     statistics.forEach(x => {
       let find = thisWeek.find(
         y =>
-          y.videos.video == 'https://youtu.be/' + x.id ||
-          y.videos.reaction == 'https://youtu.be/' + x.id,
+          y.videos.video == 'https://youtu.be/' + x.id
       )
 
       if (find) {
