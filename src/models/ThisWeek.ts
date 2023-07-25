@@ -40,8 +40,12 @@ const ThisWeek = mongoose.model(
       },
       artTrack: String || null,
       timeData: {
-        start: Number,
-        end: Number,
+        start: {
+          type: Number,
+          default: 0,
+          required: true,
+        },
+        end: Number || null,
       },
     },
     artist: {
@@ -268,4 +272,69 @@ const ThisWeek = mongoose.model(
   }),
 )
 
+interface IMusicData {
+  id: String
+  type: Number
+  title: {
+    simple: String
+    original: String
+  }
+  videos: {
+    video: String
+    musicVideo: String
+    artTrack?: String
+    timeData: {
+      start: Number
+      end?: Number
+    }
+  }
+  artist: {
+    woowakgood: Boolean
+    angel: Boolean
+    messi: Boolean
+    ine: Boolean
+    jingburger: Boolean
+    lilpa: Boolean
+    jururu: Boolean
+    gosegu: Boolean
+    viichan: Boolean
+    chunyang: Boolean
+    chunshik: Boolean
+    kwonmin: Boolean
+    kimchimandu: Boolean
+    nosferatuhodd: Boolean
+    dandapbug: Boolean
+    dopamine: Boolean
+    dokkhye: Boolean
+    roentgenium: Boolean
+    haku: Boolean
+    bujungingan: Boolean
+    secretto: Boolean
+    businesskim: Boolean
+    friedshrimp: Boolean
+    sophia: Boolean
+    wakphago: Boolean
+    leedeoksoo: Boolean
+    carnarjungtur: Boolean
+    callycarly: Boolean
+    pungsin: Boolean
+    freeter: Boolean
+    rusuk: Boolean
+    hikiking: Boolean
+    ninnin: Boolean
+    ballantine: Boolean
+    bulgom: Boolean
+    jentu: Boolean
+    soosemi: Boolean
+    sirianrain: Boolean
+    amadeuschoi: Boolean
+    jinhe: Boolean
+    gilbert: Boolean
+    sullivan: Boolean
+    etc: Boolean
+  },
+  uploadDate: Date
+}
+
 export default ThisWeek
+export { type IMusicData }
