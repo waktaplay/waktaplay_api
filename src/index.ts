@@ -31,24 +31,28 @@ const routers = readDeepDir(path.join(__dirname, 'routers'))
 
 
 app.use(async (ctx, next) => {
-    const token = ctx.headers.authorization?.split(" ")[1];
-    console.log(token)
+    if (ctx.path.startsWith('/mypage')) {
+        const token = ctx.headers.authorization?.split(" ")[1];
+        console.log(token);
 
-    if (!token) {
-        ctx.status = 401;
-        ctx.body = { error: 'Not authorized' };
-        return;
-    }
+        if (!token) {
+            ctx.status = 401;
+            ctx.body = { error: 'Not authorized' };
+            return;
+        }
 
-    try {
-        jwt.verify(token, `${process.env.JWT_SECRET}`);
-        // const decoded = jwt.verify(token, `${process.env.JWT_SECRET}`);
-        // ctx.state.user = decoded;
+        try {
+            jwt.verify(token, `${process.env.JWT_SECRET}`);
+            // const decoded = jwt.verify(token, `${process.env.JWT_SECRET}`);
+            // ctx.state.user = decoded;
+            await next();
+        } catch (err) {
+            console.log(err);
+            ctx.status = 401;
+            ctx.body = { error: 'Not authorized' };
+        }
+    } else {
         await next();
-    } catch (err) {
-        console.log(err)
-        ctx.status = 401;
-        ctx.body = { error: 'Not authorized' };
     }
 });
 
