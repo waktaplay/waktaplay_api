@@ -4,7 +4,7 @@ import * as dotenv from 'dotenv'
 dotenv.config()
 const mongoose = new Mongoose()
 
-mongoose.connect(process.env.MONGODB as string)
+mongoose.connect(process.env.MONGODB_USERS as string)
 
 const Users: Model<IUsers> = mongoose.model(
   'Users',

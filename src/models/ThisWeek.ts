@@ -7,7 +7,7 @@ const mongoose = new Mongoose()
 mongoose.connect(process.env.MONGODB as string)
 
 const ThisWeek = mongoose.model(
-  'ThisWeek',
+  'Music',
   new mongoose.Schema({
     id: {
       type: String,
