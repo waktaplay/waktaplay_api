@@ -3,6 +3,7 @@ import Router from '@koa/router'
 import cors from '@koa/cors'
 import bodyParser from 'koa-bodyparser'
 import morgan from 'koa-morgan'
+import jwt from 'jsonwebtoken';
 
 import fs from 'node:fs'
 import path from 'node:path'
@@ -27,6 +28,33 @@ app.use(morgan('dev'))
 app.use(morgan('combined', { stream: accessLogStream }))
 
 const routers = readDeepDir(path.join(__dirname, 'routers'))
+
+
+app.use(async (ctx, next) => {
+    if (ctx.path.startsWith('/mypage')) {
+        const token = ctx.headers.authorization?.split(" ")[1];
+        console.log(token);
+
+        if (!token) {
+            ctx.status = 401;
+            ctx.body = { error: 'Not authorized' };
+            return;
+        }
+
+        try {
+            jwt.verify(token, `${process.env.JWT_SECRET}`);
+            // const decoded = jwt.verify(token, `${process.env.JWT_SECRET}`);
+            // ctx.state.user = decoded;
+            await next();
+        } catch (err) {
+            console.log(err);
+            ctx.status = 401;
+            ctx.body = { error: 'Not authorized' };
+        }
+    } else {
+        await next();
+    }
+});
 
 console.log('------------------------------------')
 
