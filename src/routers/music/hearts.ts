@@ -1,5 +1,3 @@
-import jwt from 'jsonwebtoken'
-
 import Router from '@koa/router'
 
 import { loadJSON } from '../../functions/json'
@@ -18,9 +16,7 @@ const router = new Router()
 
 router.get('/', async (ctx, next) => {
   try {
-    const userData = jwt.decode(
-      (ctx.headers.authorization as string)?.split('Bearer ')[1],
-    ) as IUsers
+    const userData = ctx.state.user as IUsers
 
     if (!userData?.id) {
       ctx.status = 401
@@ -111,11 +107,8 @@ router.get('/', async (ctx, next) => {
 })
 
 router.post('/', async (ctx, next) => {
-  const userData = jwt.decode(
-    (ctx.headers.authorization as string)?.split(
-      'Bearer ',
-    )[1] as string,
-  ) as IUsers
+  const userData = ctx.state.user as IUsers
+
   const musicData: IMusicData[] = loadJSON(await ThisWeek.find())
 
   const musicIds = musicData.map((x: IMusicData) => x.id)

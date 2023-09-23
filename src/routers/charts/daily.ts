@@ -1,5 +1,3 @@
-import jwt from 'jsonwebtoken'
-
 import Router from '@koa/router'
 
 import { loadJSON } from '../../functions/json'
@@ -39,8 +37,7 @@ async function getDetailData(): Promise<any> {
 
     statistics.forEach(x => {
       let find = thisWeek.find(
-        y =>
-          y.videos.video == 'https://youtu.be/' + x.id
+        y => y.videos.video == 'https://youtu.be/' + x.id,
       )
 
       if (find) {
@@ -92,11 +89,7 @@ async function getDetailData(): Promise<any> {
 
 router.all('/', async (ctx, next) => {
   try {
-    const userData = jwt.decode(
-      (ctx.headers.authorization as string)?.split(
-        'Bearer ',
-      )[1] as string,
-    ) as IUsers
+    const userData = ctx.state.user as IUsers
 
     let hearts: string[] = []
     if (userData?.id) {

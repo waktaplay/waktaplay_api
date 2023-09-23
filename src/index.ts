@@ -1,9 +1,10 @@
 import Koa from 'koa'
 import Router from '@koa/router'
 import cors from '@koa/cors'
-import bodyParser from 'koa-bodyparser'
+
+import jwt from 'jsonwebtoken'
 import morgan from 'koa-morgan'
-import jwt from 'jsonwebtoken';
+import bodyParser from 'koa-bodyparser'
 
 import fs from 'node:fs'
 import path from 'node:path'
@@ -12,6 +13,8 @@ import * as dotenv from 'dotenv'
 
 import { color } from './functions/color'
 import { readDeepDir } from './functions/fs'
+
+import { type IUsers } from './models/Users'
 
 const app = new Koa()
 const router = new Router()
@@ -29,33 +32,37 @@ app.use(morgan('combined', { stream: accessLogStream }))
 
 const routers = readDeepDir(path.join(__dirname, 'routers'))
 
-
+/* Middleware - JWT Authorization */
 app.use(async (ctx, next) => {
-    if (ctx.path.startsWith('/mypage')) {
-        const token = ctx.headers.authorization?.split(" ")[1];
-        console.log(token);
+  const token = ctx.headers.authorization?.split('Bearer ')[1]
+  console.log('Authorization Token', token)
 
-        if (!token) {
-            ctx.status = 401;
-            ctx.body = { error: 'Not authorized' };
-            return;
-        }
-
-        try {
-            jwt.verify(token, `${process.env.JWT_SECRET}`);
-            // const decoded = jwt.verify(token, `${process.env.JWT_SECRET}`);
-            // ctx.state.user = decoded;
-            await next();
-        } catch (err) {
-            console.log(err);
-            ctx.status = 401;
-            ctx.body = { error: 'Not authorized' };
-        }
-    } else {
-        await next();
+  try {
+    if (token) {
+      // jwt.verify(token, `${process.env.JWT_SECRET}`)
+      const decoded = jwt.verify(token, `${process.env.JWT_SECRET}`)
+      ctx.state.user = decoded as IUsers
+    } else if (!token && ctx.path.startsWith('/mypage')) {
+      ctx.status = 401
+      return ctx.body = {
+        status: 401,
+        data: 'Unauthorized',
+      }
     }
-});
 
+    await next()
+  } catch (err) {
+    console.log(err)
+
+    ctx.status = 401
+    ctx.body = {
+      status: 401,
+      data: 'Unauthorized',
+    }
+  }
+})
+
+/* Importing Routes */
 console.log('------------------------------------')
 
 for (const i in routers) {
