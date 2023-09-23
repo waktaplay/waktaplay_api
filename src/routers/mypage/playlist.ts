@@ -1,4 +1,3 @@
-import jwt from 'jsonwebtoken'
 import Router from '@koa/router'
 
 import { v4 as uuidv4 } from 'uuid'
@@ -19,17 +18,7 @@ const router = new Router()
 
 router.get('/', async (ctx, next) => {
   try {
-    const userData = jwt.decode(
-      (ctx.headers.authorization as string)?.split('Bearer ')[1],
-    ) as IUsers
-
-    if (!userData?.id) {
-      ctx.status = 401
-      return (ctx.body = {
-        status: 401,
-        data: 'Unauthorized',
-      })
-    }
+    const userData = ctx.state.user as IUsers
 
     return (ctx.body = {
       status: 200,
@@ -52,17 +41,7 @@ router.get('/', async (ctx, next) => {
 
 router.post('/', async (ctx, next) => {
   try {
-    const userData = jwt.decode(
-      (ctx.headers.authorization as string)?.split('Bearer ')[1],
-    ) as IUsers
-
-    if (!userData?.id) {
-      ctx.status = 401
-      return (ctx.body = {
-        status: 401,
-        data: 'Unauthorized',
-      })
-    }
+    const userData = ctx.state.user as IUsers
 
     const body = ctx.request.body as IPlaylistBody
 
@@ -109,9 +88,7 @@ router.get('/:id', async (ctx, next) => {
     }
 
     if (!playlist.sharing) {
-      const userData = jwt.decode(
-        (ctx.headers.authorization as string)?.split('Bearer ')[1],
-      ) as IUsers
+      const userData = ctx.state.user as IUsers
 
       if (playlist.author !== userData.id) {
         ctx.status = 403
@@ -143,9 +120,8 @@ router.get('/:id', async (ctx, next) => {
 
 router.patch('/:id', async (ctx, next) => {
   try {
-    const userData = jwt.decode(
-      (ctx.headers.authorization as string)?.split('Bearer ')[1],
-    ) as IUsers
+    const userData = ctx.state.user as IUsers
+
     const playlist = await Playlist.findOne({ id: ctx.params.id })
 
     const body = ctx.request.body as IPlaylistBody
@@ -155,14 +131,6 @@ router.patch('/:id', async (ctx, next) => {
       return (ctx.body = {
         status: 404,
         message: 'Playlist not found.',
-      })
-    }
-
-    if (!userData?.id) {
-      ctx.status = 401
-      return (ctx.body = {
-        status: 401,
-        data: 'Unauthorized',
       })
     }
 
@@ -203,9 +171,8 @@ router.patch('/:id', async (ctx, next) => {
 
 router.delete('/:id', async (ctx, next) => {
   try {
-    const userData = jwt.decode(
-      (ctx.headers.authorization as string)?.split('Bearer ')[1],
-    ) as IUsers
+    const userData = ctx.state.user as IUsers
+
     const playlist = await Playlist.findOne({ id: ctx.params.id })
 
     if (!playlist) {
@@ -213,14 +180,6 @@ router.delete('/:id', async (ctx, next) => {
       return (ctx.body = {
         status: 404,
         message: 'Playlist not found.',
-      })
-    }
-
-    if (!userData?.id) {
-      ctx.status = 401
-      return (ctx.body = {
-        status: 401,
-        data: 'Unauthorized',
       })
     }
 

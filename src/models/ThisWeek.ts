@@ -332,7 +332,7 @@ interface IMusicData {
     gilbert: Boolean
     sullivan: Boolean
     etc: Boolean
-  },
+  }
   uploadDate: Date
 }
 

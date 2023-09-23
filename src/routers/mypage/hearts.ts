@@ -1,4 +1,3 @@
-import jwt from 'jsonwebtoken'
 import Router from '@koa/router'
 
 import { errorLog } from '../../functions/error'
@@ -10,17 +9,7 @@ const router = new Router()
 
 router.all('/', async (ctx, next) => {
   try {
-    const userData = jwt.decode(
-      (ctx.headers.authorization as string)?.split('Bearer ')[1],
-    ) as IUsers
-
-    if (!userData?.id) {
-      ctx.status = 401
-      return (ctx.body = {
-        status: 401,
-        data: 'Unauthorized',
-      })
-    }
+    const userData = ctx.state.user as IUsers
 
     return (ctx.body = {
       status: 200,
