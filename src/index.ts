@@ -39,10 +39,9 @@ app.use(async (ctx, next) => {
 
   try {
     if (token) {
-      // jwt.verify(token, `${process.env.JWT_SECRET}`)
       const decoded = jwt.verify(token, `${process.env.JWT_SECRET}`)
       ctx.state.user = decoded as IUsers
-    } else if (!token && ctx.path.startsWith('/mypage')) {
+    } else if (!token && (ctx.path.startsWith('/mypage') || ctx.path.startsWith('/discord'))) {
       ctx.status = 401
       return ctx.body = {
         status: 401,
