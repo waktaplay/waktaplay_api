@@ -253,10 +253,10 @@
   dependencies:
     "@types/koa" "*"
 
-"@types/koa-morgan@^1.0.5":
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/@types/koa-morgan/-/koa-morgan-1.0.5.tgz#ae43b48bc7add4906e7f9662115f5154ed0d1c4e"
-  integrity sha512-NAc3HZxk2GAesyqbFTnZowaSW178pCoGQsnmPcE1sjGenTuZorj5Hnfd8rh+bEHgpBY4rqsuA5soe/HcqrIFpQ==
+"@types/koa-morgan@^1.0.6":
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/@types/koa-morgan/-/koa-morgan-1.0.6.tgz#fb9286cf1983b15f0e896f525c19969189f6e7a4"
+  integrity sha512-oUbDffV2F6TxsKrsFZ6bh/mMloayTU2p3ScbWm2vw+fLq0HcHRxmTTojoTmK94yOa5x7h1F+VReiFfWv+XDiYA==
   dependencies:
     "@types/koa" "*"
     "@types/morgan" "*"
