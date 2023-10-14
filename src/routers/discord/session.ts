@@ -8,113 +8,116 @@ import Session, { ISession } from '../../models/Session'
 const router = new Router()
 
 router.get('/:id', async (ctx, next) => {
-    const { id: SessionId } = ctx.params
+  const { id: SessionId } = ctx.params
 
-    const session: ISession[] = await Session.find({
-        id: SessionId
+  const session: ISession[] = await Session.find({
+    id: SessionId,
+  })
+
+  if (session[0]) {
+    return (ctx.body = {
+      sessionId: session[0].id,
+      sessionKey: session[0].key,
+      playlist: session[0].playlist,
     })
-
-    if (session[0]) {
-        return ctx.body = {
-            sessionId: session[0].id,
-            sessionKey: session[0].key,
-            playlist: session[0].playlist
-        }
-    }
+  }
 })
 
 router.put('/', async (ctx, next) => {
-    const sessionId = uuidv4()
-    const sessionKey = Buffer.from(sessionId).toString('base64')
+  const sessionId = uuidv4()
+  const sessionKey = Buffer.from(sessionId).toString('base64')
 
-    const { id: userId } = ctx.state.user as IUsers
-    const { playlist } = ctx.request.body as ISession
+  const { id: userId } = ctx.state.user as IUsers
+  const { playlist } = ctx.request.body as ISession
 
-    try {
-        await Session.create({
-            id: sessionId,
-            key: sessionKey,
-            user: userId,
-            playlist: playlist || []
-        })
-    } catch (e: any) {
-        if (e.code == 11000) {
-            await Session.deleteMany({
-                user: userId,
-            })
+  try {
+    await Session.create({
+      id: sessionId,
+      key: sessionKey,
+      user: userId,
+      playlist: playlist || [],
+    })
+  } catch (e: any) {
+    if (e.code == 11000) {
+      await Session.deleteMany({
+        user: userId,
+      })
 
-            await Session.create({
-                id: sessionId,
-                key: sessionKey,
-                user: userId,
-                playlist: playlist || []
-            })
-        } else {
-            console.error(e)
-            throw e
-        }
+      await Session.create({
+        id: sessionId,
+        key: sessionKey,
+        user: userId,
+        playlist: playlist || [],
+      })
+    } else {
+      console.error(e)
+      throw e
     }
+  }
 
-    ctx.body = { sessionId, sessionKey, playlist: playlist || [] }
+  ctx.body = { sessionId, sessionKey, playlist: playlist || [] }
 })
 
 router.post('/:id', async (ctx, next) => {
-    const { id: SessionId } = ctx.params
-    const { playlist } = ctx.request.body as ISession
+  const { id: SessionId } = ctx.params
+  const { playlist } = ctx.request.body as ISession
 
-    const session = await Session.findOne({
-        id: SessionId
-    })
+  const session = await Session.findOne({
+    id: SessionId,
+  })
 
-    if (session) {
-        const { id: userId } = ctx.state.user as IUsers
+  if (session) {
+    const { id: userId } = ctx.state.user as IUsers
 
-        if (session.user == userId) {
-            await Session.updateOne({
-                id: SessionId
-            }, {
-                playlist: playlist
-            })
+    if (session.user == userId) {
+      await Session.updateOne(
+        {
+          id: SessionId,
+        },
+        {
+          playlist: playlist,
+        },
+      )
 
-            return ctx.body = {
-                sessionId: SessionId,
-                sessionKey: session.key,
-                playlist: playlist
-            }
-        } else {
-            ctx.status = 403
-            return ctx.body = {
-                status: 403,
-                data: 'Forbidden',
-            }
-        }
+      return (ctx.body = {
+        sessionId: SessionId,
+        sessionKey: session.key,
+        playlist: playlist,
+      })
+    } else {
+      ctx.status = 403
+      return (ctx.body = {
+        status: 403,
+        data: 'Forbidden',
+      })
     }
+  }
 })
 
 router.delete('/:id', async (ctx, next) => {
-    const { id: SessionId } = ctx.params
+  const { id: SessionId } = ctx.params
 
-    const session = await Session.findOne({
-        id: SessionId
-    })
+  const session = await Session.findOne({
+    id: SessionId,
+  })
 
-    if (session) {
-        const { id: userId } = ctx.state.user as IUsers
+  if (session) {
+    const { id: userId } = ctx.state.user as IUsers
 
-        if (session.user == userId) {
-            await Session.deleteOne({
-                id: SessionId
-            })
+    if (session.user == userId) {
+      await Session.deleteOne({
+        id: SessionId,
+      })
 
-            return ctx.body = {}
-        } else {
-            ctx.status = 403
-            return ctx.body = {
-                status: 403,
-                data: 'Forbidden',
-            }
-        }
+      return (ctx.body = {})
+    } else {
+      ctx.status = 403
+      return (ctx.body = {
+        status: 403,
+        data: 'Forbidden',
+      })
     }
+  }
 })
 
 module.exports = router

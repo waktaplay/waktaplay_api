@@ -19,12 +19,26 @@ const Users: Model<IUsers> = mongoose.model(
       unique: true,
       required: true,
     },
+    withDrawed: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
+    createdAt: {
+      type: Date,
+      required: true,
+      default: Date.now,
+    },
+    withdrawedAt: Date,
   }),
 )
 
 interface IUsers {
   id: string
   email: string
+  withDrawed: boolean
+  createdAt: Date
+  withdrawedAt?: Date
 }
 
 export default Users

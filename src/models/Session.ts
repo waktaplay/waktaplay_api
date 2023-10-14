@@ -10,29 +10,29 @@ const Session = mongoose.model<ISession>(
   'Session',
   new mongoose.Schema<ISession>({
     id: {
-        type: String,
-        required: true,
-        unique: true
+      type: String,
+      required: true,
+      unique: true,
     },
     key: {
-        type: String,
-        required: true,
-        unique: true
+      type: String,
+      required: true,
+      unique: true,
     },
     user: {
-        type: String,
-        required: true,
-        unique: true
+      type: String,
+      required: true,
+      unique: true,
     },
-    playlist: Array
-  })
+    playlist: Array,
+  }),
 )
 
 interface ISession {
-    id: string,
-    key: string,
-    user: string,
-    playlist?: string[]
+  id: string
+  key: string
+  user: string
+  playlist?: string[]
 }
 
 export default Session
