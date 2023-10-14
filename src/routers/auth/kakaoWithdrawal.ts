@@ -10,15 +10,14 @@ interface withdrawalBody {
 
 const router = new Router()
 
-router.all('/', async (ctx, next) => {
+router.post('/', async (ctx, next) => {
   try {
-    const { Authorization } = ctx.headers
+    const { authorization } = ctx.headers
 
-    if (Authorization) {
-      if ((Authorization as string).startsWith('KakaoAK ')) {
+    if (authorization) {
+      if ((authorization as string).startsWith('KakaoAK ')) {
         if (
-          Authorization ==
-          `KakaoAK ${process.env.KAKAO_WITHDRAWAL_TOKEN}`
+          authorization == `KakaoAK ${process.env.KAKAO_ADMIN_KEY}`
         ) {
           await Users.updateOne(
             {

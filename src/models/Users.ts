@@ -19,15 +19,15 @@ const Users: Model<IUsers> = mongoose.model<IUsers>(
       unique: true,
       required: true,
     },
-    withDrawed: {
-      type: Boolean,
-      required: true,
-      default: false,
-    },
     createdAt: {
       type: Date,
       required: true,
       default: Date.now,
+    },
+    withDrawed: {
+      type: Boolean,
+      required: true,
+      default: false,
     },
     withdrawedAt: Date,
   }),
@@ -36,8 +36,8 @@ const Users: Model<IUsers> = mongoose.model<IUsers>(
 interface IUsers {
   id: string
   email: string
-  withDrawed: boolean
   createdAt: Date
+  withDrawed: boolean
   withdrawedAt?: Date
 }
 
