@@ -6,9 +6,9 @@ const mongoose = new Mongoose()
 
 mongoose.connect(process.env.MONGODB as string)
 
-const Hearts = mongoose.model(
+const Hearts = mongoose.model<IHearts>(
   'Hearts',
-  new mongoose.Schema({
+  new mongoose.Schema<IHearts>({
     artist: {
       type: String,
       required: false,

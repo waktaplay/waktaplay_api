@@ -6,9 +6,9 @@ const mongoose = new Mongoose()
 
 mongoose.connect(process.env.MONGODB as string)
 
-const StatisticsDate = mongoose.model(
+const StatisticsDate = mongoose.model<IStatisticsDate>(
   'StatisticsDate',
-  new mongoose.Schema({
+  new mongoose.Schema<IStatisticsDate>({
     realtime: {
       type: Number,
       required: true,

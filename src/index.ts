@@ -44,10 +44,10 @@ app.use(async (ctx, next) => {
       ctx.state.user = decoded as IUsers
     } else if (!token && ctx.path.startsWith('/mypage')) {
       ctx.status = 401
-      return ctx.body = {
+      return (ctx.body = {
         status: 401,
         data: 'Unauthorized',
-      }
+      })
     }
 
     await next()

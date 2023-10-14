@@ -6,9 +6,9 @@ const mongoose = new Mongoose()
 
 mongoose.connect(process.env.MONGODB as string)
 
-const ThisWeek = mongoose.model(
+const ThisWeek = mongoose.model<IMusicData>(
   'Music',
-  new mongoose.Schema({
+  new mongoose.Schema<IMusicData>({
     id: {
       type: String,
       unique: true,
