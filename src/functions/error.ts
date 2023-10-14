@@ -8,7 +8,7 @@ async function errorLog(
 ) {
   if (!webhook) throw ReferenceError('webhook is not defined')
 
-  if (!webhook.startsWith('https://discord.com')) {
+  if (!webhook.startsWith('https://discord.com/')) {
     throw Error('Invalid webhook URL')
   }
 
