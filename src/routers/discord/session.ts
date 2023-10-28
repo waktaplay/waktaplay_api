@@ -7,22 +7,6 @@ import Session, { ISession } from '../../models/Session'
 
 const router = new Router()
 
-router.get('/:id', async (ctx, next) => {
-  const { id: SessionId } = ctx.params
-
-  const session: ISession[] = await Session.find({
-    id: SessionId,
-  })
-
-  if (session[0]) {
-    return (ctx.body = {
-      sessionId: session[0].id,
-      sessionKey: session[0].key,
-      playlist: session[0].playlist,
-    })
-  }
-})
-
 router.put('/', async (ctx, next) => {
   const sessionId = uuidv4()
   const sessionKey = Buffer.from(sessionId).toString('base64')
@@ -58,6 +42,22 @@ router.put('/', async (ctx, next) => {
   ctx.body = { sessionId, sessionKey, playlist: playlist || [] }
 })
 
+router.get('/:id', async (ctx, next) => {
+  const { id: SessionId } = ctx.params
+
+  const session: ISession[] = await Session.find({
+    id: SessionId,
+  })
+
+  if (session[0]) {
+    return (ctx.body = {
+      sessionId: session[0].id,
+      sessionKey: session[0].key,
+      playlist: session[0].playlist,
+    })
+  }
+})
+
 router.post('/:id', async (ctx, next) => {
   const { id: SessionId } = ctx.params
   const { playlist } = ctx.request.body as ISession
@@ -91,6 +91,8 @@ router.post('/:id', async (ctx, next) => {
         data: 'Forbidden',
       })
     }
+  } else {
+    return ctx.status = 410
   }
 })
 
