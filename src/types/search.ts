@@ -2,12 +2,8 @@ import { IMusicData } from '../models/ThisWeek'
 
 interface musicSearchResult extends IMusicData {
   id_trans: String
-  title: {
-    simple: String
-    simple_trans: String
-    original: String
-    original_trans: String
-  }
+  title: String
+  title_trans: String
 }
 
 interface artistSearchResult {

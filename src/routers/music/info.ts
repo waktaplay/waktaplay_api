@@ -21,9 +21,9 @@ async function getDetailData(id: string): Promise<any> {
 
     const coversData = thisWeek.filter(
       x =>
-        String(x.title.simple)
+        String(x.title)
           .split(' - ')[1]
-          .includes(String(data?.title.simple).split(' - ')[1]) &&
+          .includes(String(data?.title).split(' - ')[1]) &&
         x.id != data?.id,
     )
     return { data: data, covers: coversData }

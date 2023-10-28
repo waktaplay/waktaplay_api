@@ -28,16 +28,10 @@ async function getDetailData(): Promise<any[]> {
         id: x.id,
         id_trans: x.id.toLowerCase(),
         type: x.type,
-        title: {
-          simple: x.title.simple,
-          simple_trans: x.title.simple
-            .replaceAll(' ', '')
-            .toLowerCase(),
-          original: x.title.original,
-          original_trans: x.title.original
-            .replaceAll(' ', '')
-            .toLowerCase(),
-        },
+        title: x.title,
+        title_trans: x.title
+          .replaceAll(' ', '')
+          .toLowerCase(),
         videos: x.videos,
         artist: x.artist,
         uploadDate: x.uploadDate,

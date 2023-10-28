@@ -275,10 +275,7 @@ const ThisWeek = mongoose.model<IMusicData>(
 interface IMusicData {
   id: String
   type: Number
-  title: {
-    simple: String
-    original: String
-  }
+  title: String
   videos: {
     video: String
     musicVideo: String
