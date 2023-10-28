@@ -6,7 +6,7 @@ const mongoose = new Mongoose()
 
 mongoose.connect(process.env.MONGODB_USERS as string)
 
-const Users: Model<IUsers> = mongoose.model(
+const Users: Model<IUsers> = mongoose.model<IUsers>(
   'Users',
   new mongoose.Schema({
     id: {
@@ -19,15 +19,15 @@ const Users: Model<IUsers> = mongoose.model(
       unique: true,
       required: true,
     },
-    withDrawed: {
-      type: Boolean,
-      required: true,
-      default: false,
-    },
     createdAt: {
       type: Date,
       required: true,
       default: Date.now,
+    },
+    withDrawed: {
+      type: Boolean,
+      required: true,
+      default: false,
     },
     withdrawedAt: Date,
   }),
@@ -36,8 +36,8 @@ const Users: Model<IUsers> = mongoose.model(
 interface IUsers {
   id: string
   email: string
-  withDrawed: boolean
   createdAt: Date
+  withDrawed: boolean
   withdrawedAt?: Date
 }
 

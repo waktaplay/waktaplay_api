@@ -21,7 +21,7 @@ async function getDetailData(): Promise<any[]> {
       await ThisWeek.find(),
     )
     return searchResult.sort(
-      (a, b) => b.uploadDate.getTime() - a.uploadDate.getTime(),
+      (a, b) => new Date(b.uploadDate).getTime() - new Date(a.uploadDate).getTime(),
     )
   } catch (error: any) {
     await errorLog(

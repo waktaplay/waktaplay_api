@@ -6,9 +6,9 @@ const mongoose = new Mongoose()
 
 mongoose.connect(process.env.MONGODB as string)
 
-const Artist = mongoose.model(
+const Artist = mongoose.model<IArtist>(
   'Artist',
-  new mongoose.Schema({
+  new mongoose.Schema<IArtist>({
     name: {
       type: String,
       required: true,

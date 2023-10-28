@@ -6,9 +6,9 @@ const mongoose = new Mongoose()
 
 mongoose.connect(process.env.MONGODB as string)
 
-const Statistics = mongoose.model(
+const Statistics = mongoose.model<IStatistics>(
   'Statistics',
-  new mongoose.Schema({
+  new mongoose.Schema<IStatistics>({
     id: {
       type: String,
       unique: true,
