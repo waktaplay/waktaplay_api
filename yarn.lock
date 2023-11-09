@@ -277,9 +277,9 @@
     "@types/node" "*"
 
 "@types/koa__cors@^4.0.0":
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/@types/koa__cors/-/koa__cors-4.0.0.tgz#36ee90bc2e0e3f0abc3af20d18ba1ebb132d4603"
-  integrity sha512-qpwswNgQ2GxiDGNnKbDSBY5XmQTVJ6fspNvInLsAJ+jSwINxihvVzblj5anujNBg2BtL0xpUrcIt3UYwGzu05A==
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/@types/koa__cors/-/koa__cors-4.0.3.tgz#048fa1d523a27ff448c071416e774fac1bf43aab"
+  integrity sha512-zj+1sQO/6GGRGINRXlMmoiFwHibKVcjNGdh+p2SpqHDMLyvC+ce0LMHX6UBi1rdpnPZ/+osUwWdGKF945ffrzA==
   dependencies:
     "@types/koa" "*"
 
