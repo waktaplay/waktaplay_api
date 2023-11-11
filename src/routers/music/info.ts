@@ -26,7 +26,7 @@ async function getDetailData(id: string): Promise<any> {
           .includes(String(data?.title).split(' - ')[1]) &&
         x.id != data?.id,
     )
-    return { data: data, covers: coversData }
+    return { data, covers: coversData }
   } catch (error: any) {
     await errorLog(error, `/api/music/${id}`, process.env.WEBHOOK_URL)
     throw error

@@ -20,7 +20,7 @@ async function errorLog(
   content += `오류 페이지: ${page}\n`
 
   await axios.post(webhook, {
-    content: content,
+    content,
   })
 }
 

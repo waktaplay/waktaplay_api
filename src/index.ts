@@ -20,7 +20,7 @@ const app = new Koa()
 const router = new Router()
 
 const accessLogStream = fs.createWriteStream(
-  __dirname + '/logs/access.log',
+  `${__dirname}/logs/access.log`,
   { flags: 'a' },
 )
 
@@ -66,7 +66,7 @@ app.use(async (ctx, next) => {
 console.log('------------------------------------')
 
 for (const i in routers) {
-  let pathName = '/' + routers[i]
+  const pathName = `/${routers[i]}`
 
   try {
     router.use(

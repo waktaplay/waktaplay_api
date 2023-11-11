@@ -29,9 +29,7 @@ async function getDetailData(): Promise<any[]> {
         id_trans: x.id.toLowerCase(),
         type: x.type,
         title: x.title,
-        title_trans: x.title
-          .replaceAll(' ', '')
-          .toLowerCase(),
+        title_trans: x.title.replaceAll(' ', '').toLowerCase(),
         videos: x.videos,
         artist: x.artist,
         uploadDate: x.uploadDate,
@@ -64,12 +62,9 @@ async function getArtistData(): Promise<any[]> {
         name: x.name,
         shortName: x.shortName,
         group: x.group,
-        profileImage:
-          '/images/artists/' +
-          findGroupAliases(
-            x.engName.replaceAll(' ', '').toLowerCase(),
-          ) +
-          '.png',
+        profileImage: `/images/artists/${findGroupAliases(
+          x.engName.replaceAll(' ', '').toLowerCase(),
+        )}.png`,
       })
     })
 
@@ -107,8 +102,8 @@ router.all('/', async (ctx, next) => {
       })
     }
 
-    let musicOriginData = await getDetailData()
-    let artistSearchData = await getArtistData()
+    const musicOriginData = await getDetailData()
+    const artistSearchData = await getArtistData()
 
     const originalArtist = artistSearchData.map((x: any) => {
       return {

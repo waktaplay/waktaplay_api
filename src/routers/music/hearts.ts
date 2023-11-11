@@ -58,13 +58,13 @@ router.get('/', async (ctx, next) => {
           status: 200,
           data: userHearts.length > 0,
         })
-      } else {
-        return (ctx.body = {
-          status: 200,
-          data: heartsByArtist.length,
-        })
       }
-    } else if (ctx.query.video) {
+      return (ctx.body = {
+        status: 200,
+        data: heartsByArtist.length,
+      })
+    }
+    if (ctx.query.video) {
       const videoId = ctx.query.video
       const heartsByMusic = await Hearts.find({ music: videoId })
 
@@ -77,19 +77,17 @@ router.get('/', async (ctx, next) => {
             status: 200,
             data: userHearts.length > 0,
           })
-        } else {
-          return (ctx.body = {
-            status: 200,
-            data: heartsByMusic.length,
-          })
         }
-      } else {
-        ctx.status = 404
         return (ctx.body = {
-          status: 404,
-          data: 'Not Found',
+          status: 200,
+          data: heartsByMusic.length,
         })
       }
+      ctx.status = 404
+      return (ctx.body = {
+        status: 404,
+        data: 'Not Found',
+      })
     }
   } catch (error) {
     await errorLog(
@@ -133,10 +131,10 @@ router.post('/', async (ctx, next) => {
     }
 
     if (body.artist) {
-      const artist = body.artist
+      const { artist } = body
       const hearts = await Hearts.findOne({
         user: userData.id,
-        artist: artist,
+        artist,
       })
 
       if (hearts) {
@@ -144,7 +142,7 @@ router.post('/', async (ctx, next) => {
       } else {
         await Hearts.create({
           user: userData.id,
-          artist: artist,
+          artist,
         })
       }
 
@@ -160,51 +158,49 @@ router.post('/', async (ctx, next) => {
 
       return (ctx.body = {
         status: 200,
-        data: data,
+        data,
       })
-    } else {
-      const videoId = body.video
+    }
+    const videoId = body.video
 
-      if (musicIds.includes(body.video as string)) {
-        const hearts = await Hearts.findOne({
+    if (musicIds.includes(body.video as string)) {
+      const hearts = await Hearts.findOne({
+        user: userData.id,
+        music: videoId,
+      })
+
+      if (hearts) {
+        await Hearts.deleteOne({
           user: userData.id,
           music: videoId,
         })
-
-        if (hearts) {
-          await Hearts.deleteOne({
-            user: userData.id,
-            music: videoId,
-          })
-        } else {
-          await Hearts.create({
-            user: userData.id,
-            music: videoId,
-          })
-        }
-
-        const heartData: IHearts[] = loadJSON(
-          await Hearts.find({ music: videoId }),
-        )
-        const data = heartData.map(x => {
-          if (x.user !== userData.id) {
-            x.user = undefined
-          }
-          return x
-        })
-
-        return (ctx.body = {
-          status: 200,
-          data: data,
-        })
       } else {
-        ctx.status = 404
-        return (ctx.body = {
-          status: 404,
-          data: 'Not Found',
+        await Hearts.create({
+          user: userData.id,
+          music: videoId,
         })
       }
+
+      const heartData: IHearts[] = loadJSON(
+        await Hearts.find({ music: videoId }),
+      )
+      const data = heartData.map(x => {
+        if (x.user !== userData.id) {
+          x.user = undefined
+        }
+        return x
+      })
+
+      return (ctx.body = {
+        status: 200,
+        data,
+      })
     }
+    ctx.status = 404
+    return (ctx.body = {
+      status: 404,
+      data: 'Not Found',
+    })
   } catch (error) {
     await errorLog(
       error,
