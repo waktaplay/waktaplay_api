@@ -36,8 +36,8 @@ async function getDetailData(): Promise<any> {
     const previousRanking: IChartCalculation[] = []
 
     statistics.forEach(x => {
-      let find = thisWeek.find(
-        y => y.videos.video == 'https://youtu.be/' + x.id,
+      const find = thisWeek.find(
+        y => y.videos.video == `https://youtu.be/${x.id}`,
       )
 
       if (find) {

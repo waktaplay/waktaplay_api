@@ -21,7 +21,9 @@ async function getDetailData(): Promise<any[]> {
       await ThisWeek.find(),
     )
     return searchResult.sort(
-      (a, b) => new Date(b.uploadDate).getTime() - new Date(a.uploadDate).getTime(),
+      (a, b) =>
+        new Date(b.uploadDate).getTime() -
+        new Date(a.uploadDate).getTime(),
     )
   } catch (error: any) {
     await errorLog(
@@ -46,7 +48,7 @@ router.all('/', async (ctx, next) => {
 
     const artist: any = await Artist.find()
 
-    let musicOriginData: musicSearchResult[] = await getDetailData()
+    const musicOriginData: musicSearchResult[] = await getDetailData()
 
     const artistData: artistSearchResult[] = artist.filter(
       (x: any) =>
@@ -59,57 +61,58 @@ router.all('/', async (ctx, next) => {
       if (ctx.query.artist == 'isedol') {
         // 이세계아이돌: 예외처리 (개인별로 등록된 음악 추가)
         return (
-          x.artist['ine'] &&
-          x.artist['jingburger'] &&
-          x.artist['lilpa'] &&
-          x.artist['jururu'] &&
-          x.artist['gosegu'] &&
-          x.artist['viichan']
+          x.artist.ine &&
+          x.artist.jingburger &&
+          x.artist.lilpa &&
+          x.artist.jururu &&
+          x.artist.gosegu &&
+          x.artist.viichan
         )
-      } else if (ctx.query.artist == 'gomem') {
+      }
+      if (ctx.query.artist == 'gomem') {
         // 고멤: 예외처리 (개인별로 등록된 음악 추가)
         return (
-          x.artist['chunyang'] &&
-          x.artist['chunshik'] &&
-          x.artist['kwonmin'] &&
-          x.artist['kimchimandu'] &&
-          x.artist['nosferatuhodd'] &&
-          x.artist['dandapbug'] &&
-          x.artist['dopamine'] &&
-          x.artist['dokkhye'] &&
-          x.artist['roentgenium'] &&
-          x.artist['haku'] &&
-          x.artist['bujungingan'] &&
-          x.artist['secretto'] &&
-          x.artist['businesskim'] &&
-          x.artist['friedshrimp'] &&
-          x.artist['sophia'] &&
-          x.artist['wakphago'] &&
-          x.artist['leedeoksoo'] &&
-          x.artist['carnarjungtur'] &&
-          x.artist['callycarly'] &&
-          x.artist['pungsin'] &&
-          x.artist['freeter'] &&
-          x.artist['rusuk'] &&
-          x.artist['hikiking']
+          x.artist.chunyang &&
+          x.artist.chunshik &&
+          x.artist.kwonmin &&
+          x.artist.kimchimandu &&
+          x.artist.nosferatuhodd &&
+          x.artist.dandapbug &&
+          x.artist.dopamine &&
+          x.artist.dokkhye &&
+          x.artist.roentgenium &&
+          x.artist.haku &&
+          x.artist.bujungingan &&
+          x.artist.secretto &&
+          x.artist.businesskim &&
+          x.artist.friedshrimp &&
+          x.artist.sophia &&
+          x.artist.wakphago &&
+          x.artist.leedeoksoo &&
+          x.artist.carnarjungtur &&
+          x.artist.callycarly &&
+          x.artist.pungsin &&
+          x.artist.freeter &&
+          x.artist.rusuk &&
+          x.artist.hikiking
         )
-      } else if (ctx.query.artist == 'gomem-academy') {
+      }
+      if (ctx.query.artist == 'gomem-academy') {
         // 아카데미: 예외처리 (개인별로 등록된 음악 추가)
         return (
-          x.artist['ninnin'] &&
-          x.artist['ballantine'] &&
-          x.artist['bulgom'] &&
-          x.artist['jentu'] &&
-          x.artist['soosemi'] &&
-          x.artist['sirianrain'] &&
-          x.artist['amadeuschoi'] &&
-          x.artist['jinhe'] &&
-          x.artist['gilbert'] &&
-          x.artist['sullivan']
+          x.artist.ninnin &&
+          x.artist.ballantine &&
+          x.artist.bulgom &&
+          x.artist.jentu &&
+          x.artist.soosemi &&
+          x.artist.sirianrain &&
+          x.artist.amadeuschoi &&
+          x.artist.jinhe &&
+          x.artist.gilbert &&
+          x.artist.sullivan
         )
-      } else {
-        return x.artist[String(ctx.query.artist)]
       }
+      return x.artist[String(ctx.query.artist)]
     })
 
     searchResult.push(
@@ -120,13 +123,15 @@ router.all('/', async (ctx, next) => {
             findGroupAliases(x.title.simple.split(' - ')[0]) ==
             'isedol'
           )
-        } else if (ctx.query.artist == 'gomem') {
+        }
+        if (ctx.query.artist == 'gomem') {
           // 고멤: 예외처리 (단체로 등록된 음악 추가)
           return (
             findGroupAliases(x.title.simple.split(' - ')[0]) ==
             'gomem'
           )
-        } else if (ctx.query.artist == 'gomem-academy') {
+        }
+        if (ctx.query.artist == 'gomem-academy') {
           // 아카데미: 예외처리 (단체로 등록된 음악 추가)
           return (
             findGroupAliases(x.title.simple.split(' - ')[0]) ==

@@ -5,20 +5,20 @@ function readDeepDir(distPath: string) {
     ...fs
       .readdirSync(distPath)
       .filter(file =>
-        fs.statSync(distPath + '/' + file).isDirectory(),
+        fs.statSync(`${distPath}/${file}`).isDirectory(),
       )
       .reduce((all: string[], subDir: string) => {
         return [
           ...all,
           ...fs
-            .readdirSync(distPath + '/' + subDir)
-            .map(e => subDir + '/' + e),
+            .readdirSync(`${distPath}/${subDir}`)
+            .map(e => `${subDir}/${e}`),
         ]
       }, []),
     ...fs
       .readdirSync(distPath)
       .filter(
-        file => !fs.statSync(distPath + '/' + file).isDirectory(),
+        file => !fs.statSync(`${distPath}/${file}`).isDirectory(),
       ),
   ]
 }
