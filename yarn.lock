@@ -255,9 +255,9 @@
     "@types/koa" "*"
 
 "@types/koa-morgan@^1.0.6":
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/@types/koa-morgan/-/koa-morgan-1.0.6.tgz#fb9286cf1983b15f0e896f525c19969189f6e7a4"
-  integrity sha512-oUbDffV2F6TxsKrsFZ6bh/mMloayTU2p3ScbWm2vw+fLq0HcHRxmTTojoTmK94yOa5x7h1F+VReiFfWv+XDiYA==
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/@types/koa-morgan/-/koa-morgan-1.0.8.tgz#3f9d09ca8336117ea65ce8d96a83023379174906"
+  integrity sha512-2GredUi+iA3V0XrbzdsOAYgwj4F6+FnN+f5YjoKjessIE2lrMkqnc06YQQnzbMG75hRsXjyD+p6d5vlI70s1vg==
   dependencies:
     "@types/koa" "*"
     "@types/morgan" "*"
@@ -301,9 +301,9 @@
   integrity sha512-/pyBZWSLD2n0dcHE3hq8s8ZvcETHtEuF+3E7XVt0Ig2nvsVQXdghHVcEkIWjy9A0wKfTn97a/PSDYohKIlnP/w==
 
 "@types/morgan@*":
-  version "1.9.4"
-  resolved "https://registry.yarnpkg.com/@types/morgan/-/morgan-1.9.4.tgz#99965ad2bdc7c5cee28d8ce95cfa7300b19ea562"
-  integrity sha512-cXoc4k+6+YAllH3ZHmx4hf7La1dzUk6keTR4bF4b4Sc0mZxU/zK4wO7l+ZzezXm/jkYj/qC+uYGZrarZdIVvyQ==
+  version "1.9.9"
+  resolved "https://registry.yarnpkg.com/@types/morgan/-/morgan-1.9.9.tgz#d60dec3979e16c203a000159daa07d3fb7270d7f"
+  integrity sha512-iRYSDKVaC6FkGSpEVVIvrRGw0DfJMiQzIn3qr2G5B3C//AWkulhXgaBd7tS9/J79GWSYMTHGs7PfI5b3Y8m+RQ==
   dependencies:
     "@types/node" "*"
 
