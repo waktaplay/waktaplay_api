@@ -1,8 +1,8 @@
-LABEL org.opencontainers.image.source https://github.com/waktaplay/waktaplay_api
-
 # Build
 FROM node:18 AS build
 WORKDIR /usr/app
+
+LABEL org.opencontainers.image.source https://github.com/waktaplay/waktaplay_api
 
 COPY . .
 
