@@ -19,8 +19,14 @@ import { type IUsers } from './models/Users'
 const app = new Koa()
 const router = new Router()
 
+const logsDirectory = path.join(__dirname, 'logs')
+
+if (!fs.existsSync(logsDirectory)) {
+  fs.mkdirSync(logsDirectory)
+}
+
 const accessLogStream = fs.createWriteStream(
-  `${__dirname}/logs/access.log`,
+  path.join(logsDirectory, 'access.log'),
   { flags: 'a' },
 )
 
@@ -70,19 +76,19 @@ for (const i in routers) {
 
   try {
     router.use(
-      pathName.replace('main', '').replace('.ts', ''),
+      pathName.replace('main', '').split('.')[0],
       require(path.join(__dirname, 'routers', routers[i])).routes(),
     )
     console.log(
       color('green', '[Router]'),
-      `${pathName.replace('main', '').replace('.ts', '')} (${
+      `${pathName.replace('main', '').split('.')[0]} (${
         routers[i]
       }) ✅`,
     )
   } catch (error) {
     console.error(
       color('red', '[Router]'),
-      `${pathName.replace('main', '').replace('.ts', '')} (${
+      `${pathName.replace('main', '').split('.')[0]} (${
         routers[i]
       }) ❌ -> ${error}`,
     )
