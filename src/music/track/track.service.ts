@@ -48,6 +48,7 @@ export class TrackService {
   async getAllTrack(): Promise<musicDetailDto[]> {
     const musicResponse = await this.musicModel
       .find()
+      .sort({ uploadDate: -1 })
       .select('-_id -__v -artist');
 
     const heartsResponse = await this.heartsModel.find();
