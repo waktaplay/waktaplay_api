@@ -21,7 +21,7 @@ export class TrackController {
 
   @Get('all')
   @ApiOperation({
-    summary: '전체 곡 리스트 조회',
+    summary: '전체 곡 리스트 조회 (밥풀뮤)',
     description: '왁타플레이에 등록된 전체 곡 리스트를 조회합니다.',
   })
   @ApiOkResponse({
