@@ -61,8 +61,8 @@ export interface IMusic {
     kreaze: boolean;
     etc: boolean;
   };
-  genre?: string;
-  keyword?: string;
+  genres?: string[];
+  keywords?: string[];
   uploadDate: Date;
 }
 
@@ -338,8 +338,8 @@ export const MusicSchema = new mongoose.Schema<IMusic>({
       default: false,
     },
   },
-  genre: String,
-  keyword: String,
+  genres: Array,
+  keywords: Array,
   uploadDate: {
     type: Date,
     required: true,

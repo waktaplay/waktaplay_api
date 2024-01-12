@@ -1,8 +1,10 @@
-import { Inject, Injectable, Logger } from '@nestjs/common';
+import { HttpStatus, Inject, Injectable, Logger } from '@nestjs/common';
 import { Model } from 'mongoose';
 
 import { IArtist } from 'src/repository/schemas/artist.schema';
 import { IMusic } from 'src/repository/schemas/music.schema';
+
+import { APIError } from 'src/common/dto/APIError.dto';
 
 import { artistDto } from './dto/artist.dto';
 import { artistSearchDto } from './dto/artistSearch.dto';
@@ -86,13 +88,12 @@ export class ArtistService {
 
       const countResult = await this.musicModel.countDocuments(searchQuery);
 
-      const musicSearchResult = await this.musicModel.find(searchQuery, null, {
-        skip: size * (page - 1),
-        limit: size,
-        sort: {
-          uploadDate: 1,
-        },
-      });
+      const musicSearchResult = await this.musicModel
+        .find(searchQuery)
+        .skip(size * (page - 1))
+        .limit(size)
+        .sort({ uploadDate: 1 })
+        .select('-_id -__v -artist');
 
       return {
         artist: await this.artistModel
@@ -109,9 +110,12 @@ export class ArtistService {
           ),
         },
       };
-    } catch (e) {
-      this.logger.error(e);
-      throw e;
+    } catch (err) {
+      this.logger.error(err);
+      throw new APIError(
+        HttpStatus.INTERNAL_SERVER_ERROR,
+        '내부 서버 오류가 발생했습니다.',
+      );
     }
   }
 }

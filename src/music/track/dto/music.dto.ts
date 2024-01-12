@@ -1,6 +1,7 @@
 import { IMusic } from 'src/repository/schemas/music.schema';
 
-export class musicDto implements IMusic {
+// Artist => 불필요한 정보로 반환하지 않음
+export class musicDto implements Omit<IMusic, 'artist'> {
   /**
    * 음원 (Youtube) 고유 ID
    * @example rDFUl2mHIW4
@@ -57,20 +58,15 @@ export class musicDto implements IMusic {
 
   /**
    * 음원 장르
-   * @example 'K-POP'
+   * @example ["K-POP"]
    */
-  genre?: string;
+  genres?: string[];
 
   /**
    * 음원 검색 키워드
-   * @example '키딩,키링'
+   * @example ["키딩", "키링"]
    */
-  keyword?: string;
-
-  /**
-   * 아티스트 별 음원 여부
-   */
-  artist: any;
+  keywords?: string[];
 
   /**
    * 업로드 날짜

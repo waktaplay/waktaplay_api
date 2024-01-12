@@ -1,5 +1,5 @@
 import { artistDto } from './artist.dto';
-import { musicDto } from 'src/music/info/dto/music.dto';
+import { musicDto } from 'src/music/track/dto/music.dto';
 
 export class artistSearchDto {
   artist: artistDto;
