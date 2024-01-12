@@ -44,4 +44,25 @@ export class TrackService {
       isHearted: null,
     };
   }
+
+  async getAllTrack(): Promise<musicDetailDto[]> {
+    const musicResponse = await this.musicModel
+      .find()
+      .select('-_id -__v -artist');
+
+    const heartsResponse = await this.heartsModel.find();
+
+    return musicResponse.map((music) => {
+      const hearts = heartsResponse.filter((heart) => heart.music === music.id);
+
+      return {
+        ...JSON.parse(JSON.stringify(music)),
+
+        hearts: hearts.length,
+
+        // TODO: 유저 정보를 받아서 해당 유저가 좋아요를 눌렀는지 확인하는 로직 추가
+        isHearted: null,
+      };
+    });
+  }
 }

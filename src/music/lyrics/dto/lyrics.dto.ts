@@ -1,4 +1,4 @@
-export class LyricsDto {
+export class lyricsDto {
   /**
    * 시작점
    * @example 0
@@ -23,4 +23,4 @@ export class LyricsDto {
   index: number;
 }
 
-export default LyricsDto;
+export default lyricsDto;

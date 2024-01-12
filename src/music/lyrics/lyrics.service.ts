@@ -5,7 +5,7 @@ import { AxiosError } from 'axios';
 import { catchError, firstValueFrom } from 'rxjs';
 
 import { APIError } from 'src/common/dto/APIError.dto';
-import { LyricsDto } from './dto/lyrics.dto';
+import { lyricsDto } from './dto/lyrics.dto';
 
 @Injectable()
 export class LyricsService {
@@ -16,7 +16,7 @@ export class LyricsService {
   async getLyricsFile(
     id: string,
     ext: 'srt' | 'txt' = 'srt',
-  ): Promise<LyricsDto[]> {
+  ): Promise<lyricsDto[]> {
     try {
       const { data: lyricsFile } = await firstValueFrom(
         this.httpService
@@ -44,18 +44,20 @@ export class LyricsService {
     }
   }
 
-  parseSubtitle(fileData: string): LyricsDto[] {
-    const data: LyricsDto[] = [];
+  // SRT / VTT 파일을 파싱해서 가사 데이터를 추출
+  // TXT에서는 시간 정보를 파싱하지 않음
+  parseSubtitle(fileData: string): lyricsDto[] {
+    const data: lyricsDto[] = [];
 
     const lines = fileData
       .trim()
       .split(/\r?\n/)
       .filter((line) => line.trim().length > 0);
 
-    let skipWEBVTT = false;
-    let lastStatus = 0;
-    let tmpTimeData = { start: 0, end: 0 };
-    let index = 0;
+    let index: number = 0;
+    let lastStatus: number = 0;
+    let tmpTimeData: object = null;
+    let skipWEBVTT: boolean = false;
 
     lines.forEach((line) => {
       if (!skipWEBVTT && line.trim().toUpperCase() === 'WEBVTT') {
@@ -82,6 +84,7 @@ export class LyricsService {
     return data;
   }
 
+  // SRT / VTT 파일에서 시간을 초 단위로 변환
   convertTimeToSec(time: string): number {
     const [hours, minutes, seconds] = time.split(':').map((time, i) => {
       if (i < 2) {
