@@ -6,7 +6,8 @@ import { IHearts } from 'src/repository/schemas/hearts.schema';
 
 import { APIError } from 'src/common/dto/APIError.dto';
 
-import { musicDetailDto } from './dto/musicDetailResponse.dto';
+import { musicDetailDto } from './dto/music.dto';
+import { SerializeJson } from 'src/common/util/serializeJson';
 
 @Injectable()
 export class TrackService {
@@ -35,8 +36,19 @@ export class TrackService {
       .where('music')
       .equals(id);
 
+    // artTrack이 0이나 빈 문자열로 날라오는 경우 대비
+    musicResponse.videos.artTrack =
+      musicResponse.videos.artTrack === '0' ||
+      musicResponse.videos.artTrack === ''
+        ? null
+        : musicResponse.videos.artTrack;
+
+    // 장르, 키워드가 빈 문자열로 날라오는 경우 대비
+    musicResponse.genres = musicResponse.genres.filter((g) => g !== '');
+    musicResponse.keywords = musicResponse.keywords.filter((k) => k !== '');
+
     return {
-      ...JSON.parse(JSON.stringify(musicResponse)),
+      ...SerializeJson.serialize<IMusic>(musicResponse),
 
       hearts: heartsResponse.length,
 
@@ -45,11 +57,12 @@ export class TrackService {
     };
   }
 
-  async getAllTrack(): Promise<musicDetailDto[]> {
+  async getTracksMany(limit: number = -1): Promise<musicDetailDto[]> {
     const musicResponse = await this.musicModel
       .find()
       .sort({ uploadDate: -1 })
-      .select('-_id -__v -artist');
+      .select('-_id -__v -artist')
+      .limit(limit);
 
     const heartsResponse = await this.heartsModel.find();
 
@@ -57,7 +70,7 @@ export class TrackService {
       const hearts = heartsResponse.filter((heart) => heart.music === music.id);
 
       return {
-        ...JSON.parse(JSON.stringify(music)),
+        ...SerializeJson.serialize<IMusic>(music),
 
         hearts: hearts.length,
 

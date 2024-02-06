@@ -7,6 +7,7 @@ export interface IMusic {
   videos: {
     video: string;
     musicVideo: string;
+    reaction?: string;
     artTrack?: string;
     timeData: {
       start: number;

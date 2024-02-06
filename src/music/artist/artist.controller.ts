@@ -1,17 +1,10 @@
-import {
-  Controller,
-  Get,
-  HttpException,
-  HttpStatus,
-  Logger,
-  Param,
-  Query,
-} from '@nestjs/common';
-import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { Controller, Get, Logger, Param, Query } from '@nestjs/common';
+import { ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger';
 
 import { ArtistService } from './artist.service';
-import { artistResponseDto } from './dto/artistResponse.dto';
-import { artistListResponseDto } from './dto/artistListResponse.dto';
+
+import { artistDto } from './dto/artist.dto';
+import { artistSearchDto } from './dto/artistSearch.dto';
 
 @ApiTags('Music - Artist Information')
 @Controller('music/artist')
@@ -25,23 +18,8 @@ export class ArtistController {
     summary: '아티스트 리스트 확인',
     description: '왁타플레이에 등록된 아티스트 리스트를 확인합니다.',
   })
-  @ApiOkResponse({
-    description: '아티스트 리스트',
-    type: artistListResponseDto,
-  })
-  async getArtistList(): Promise<artistListResponseDto> {
-    try {
-      return {
-        code: 'OPERATION_COMPLETE',
-        status: HttpStatus.OK,
-        data: await this.artistService.getArtistList(),
-      };
-    } catch (e) {
-      throw new HttpException(
-        e,
-        HttpStatus[(e.code as string) || 'INTERNAL_SERVER_ERROR'],
-      );
-    }
+  async getArtistList(): Promise<artistDto[]> {
+    return await this.artistService.getArtistList();
   }
 
   @Get(':id')
@@ -49,30 +27,27 @@ export class ArtistController {
     summary: '아티스트 정보 확인',
     description: '선택한 왁타플레이 아티스트 정보를 확인합니다.',
   })
-  @ApiOkResponse({
-    description: '아티스트 정보',
-    type: artistResponseDto,
+  @ApiQuery({
+    name: 'page',
+    required: false,
+    type: Number,
+    description: 'music값 페이지 번호',
+  })
+  @ApiQuery({
+    name: 'size',
+    required: false,
+    type: Number,
+    description: '한 페이지에 보여질 music값 개수',
   })
   async getOneArtist(
     @Param('id') id: string,
     @Query('page') page: string = '1',
     @Query('size') size: string = '20',
-  ): Promise<artistResponseDto> {
-    try {
-      return {
-        code: 'OPERATION_COMPLETE',
-        status: HttpStatus.OK,
-        data: await this.artistService.getOneArtist(
-          id,
-          parseInt(page, 10),
-          parseInt(size, 10),
-        ),
-      };
-    } catch (e) {
-      throw new HttpException(
-        e,
-        HttpStatus[(e.code as string) || 'INTERNAL_SERVER_ERROR'],
-      );
-    }
+  ): Promise<artistSearchDto> {
+    return await this.artistService.getOneArtist(
+      id,
+      parseInt(page, 10),
+      parseInt(size, 10),
+    );
   }
 }

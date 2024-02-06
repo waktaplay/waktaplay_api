@@ -92,7 +92,7 @@ export class ArtistService {
         .find(searchQuery)
         .skip(size * (page - 1))
         .limit(size)
-        .sort({ uploadDate: 1 })
+        .sort({ uploadDate: -1 })
         .select('-_id -__v -artist');
 
       return {

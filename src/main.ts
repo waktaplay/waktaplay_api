@@ -7,7 +7,9 @@ import {
 
 import { AppModule } from './app.module';
 import { version } from '../package.json';
+
 import { GlobalExceptionFilter } from './common/filter/global-exception.filter';
+import { TransformInterceptor } from './common/interceptors/transform.interceptor';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
@@ -24,11 +26,14 @@ async function bootstrap() {
       .build();
 
     const document = SwaggerModule.createDocument(app, config);
-    SwaggerModule.setup('docs', app, document);
+    await SwaggerModule.setup('docs', app, document);
   }
 
   if (process.env.GLOBAL_CORS === '1') {
-    app.enableCors();
+    app.enableCors({
+      origin: '*',
+      credentials: true,
+    });
   } else {
     app.enableCors({
       origin: [],
@@ -37,6 +42,7 @@ async function bootstrap() {
   }
 
   app.useGlobalFilters(new GlobalExceptionFilter());
+  app.useGlobalInterceptors(new TransformInterceptor());
 
   if (process.env.NODE_ENV === 'development') {
     await app.listen(4000);
