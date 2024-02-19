@@ -2,8 +2,14 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 
 import { AppController } from './app.controller';
-import { MusicModule } from './music/music.module';
-import { RepositoryModule } from './repository/repository.module';
+
+import { AuthModule } from './auth/auth.module';
+import { RepositoryModule } from './common/repository/repository.module';
+import { ArtistModule } from './artist/artist.module';
+import { ChartsModule } from './charts/charts.module';
+import { LyricsModule } from './lyrics/lyrics.module';
+import { MypageModule } from './mypage/mypage.module';
+import { SongsModule } from './songs/songs.module';
 
 @Module({
   imports: [
@@ -11,7 +17,12 @@ import { RepositoryModule } from './repository/repository.module';
       isGlobal: true,
       envFilePath: ['.env.development', '.env'],
     }),
-    MusicModule,
+    AuthModule,
+    ArtistModule,
+    ChartsModule,
+    LyricsModule,
+    MypageModule,
+    SongsModule,
     RepositoryModule,
   ],
   controllers: [AppController],

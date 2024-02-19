@@ -6,7 +6,6 @@ import {
   HttpStatus,
 } from '@nestjs/common';
 
-import APIError from '../dto/APIError.dto';
 import APIException from '../dto/APIException.dto';
 
 import { FastifyReply } from 'fastify';
@@ -19,17 +18,18 @@ export class GlobalExceptionFilter implements ExceptionFilter {
     const response: FastifyReply<any> = ctx.getResponse<FastifyReply>();
 
     let status: HttpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
-    let message: string | object | APIError = '내부 서버 오류가 발생했습니다.';
+    let message: string | object | APIException =
+      '내부 서버 오류가 발생했습니다.';
 
     if (exception instanceof HttpException) {
       status = exception.getStatus();
       message = exception.getResponse();
     } else if (exception instanceof APIException) {
       status = exception.status;
-      message = exception.APIError;
+      message = exception;
     }
 
-    if (message instanceof APIError) {
+    if (message instanceof APIException) {
       response.status(status).send({
         code: HttpStatus[message.status],
         status: message.status,

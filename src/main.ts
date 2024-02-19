@@ -22,7 +22,7 @@ async function bootstrap() {
       .setTitle('WAKTAPLAY Music API')
       .setDescription('WAKTAPLAY Music 서비스를 위한 백엔드 RestAPI 입니다.')
       .setVersion(version)
-      // .addBearerAuth()
+      .addBearerAuth()
       .build();
 
     const document = SwaggerModule.createDocument(app, config);
