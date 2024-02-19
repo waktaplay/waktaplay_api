@@ -5,7 +5,7 @@ import { SongsService } from './songs.service';
 import { musicDetailDto } from './dto/music.dto';
 
 @ApiTags('Music - Track Information')
-@Controller('music/songs')
+@Controller('songs')
 export class SongsController {
   private readonly logger = new Logger(SongsController.name);
 

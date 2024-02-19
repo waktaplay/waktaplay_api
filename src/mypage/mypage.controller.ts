@@ -31,7 +31,7 @@ import { APIException } from 'src/common/dto/APIException.dto';
 
 @ApiTags('Music - Mypage')
 @ApiBearerAuth()
-@Controller('music/mypage')
+@Controller('mypage')
 export class MypageController {
   private readonly logger = new Logger(MypageController.name);
 

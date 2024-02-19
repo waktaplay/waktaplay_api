@@ -5,7 +5,7 @@ import { ChartsService } from './charts.service';
 import { chartDto } from './dto/chart.dto';
 
 @ApiTags('Music - Chart Data')
-@Controller('music/charts')
+@Controller('charts')
 export class ChartsController {
   private readonly logger = new Logger(ChartsController.name);
 

@@ -5,7 +5,7 @@ import { LyricsService } from './lyrics.service';
 import { lyricsDto } from './dto/lyrics.dto';
 
 @ApiTags('Music - Get Lyrics')
-@Controller('music/lyrics')
+@Controller('lyrics')
 export class LyricsController {
   private readonly logger = new Logger(LyricsController.name);
 

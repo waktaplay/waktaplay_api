@@ -7,7 +7,7 @@ import { artistDto } from './dto/artist.dto';
 import { artistSearchDto } from './dto/artistSearch.dto';
 
 @ApiTags('Music - Artist Information')
-@Controller('music/artist')
+@Controller('artist')
 export class ArtistController {
   private readonly logger = new Logger(ArtistController.name);
 
