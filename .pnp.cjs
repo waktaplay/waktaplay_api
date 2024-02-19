@@ -46,7 +46,7 @@ const RAW_RUNTIME_STATE =
           ["fastify", "npm:4.26.1"],\
           ["mongoose", "npm:8.1.3"],\
           ["prettier", "npm:3.2.5"],\
-          ["reflect-metadata", "npm:0.1.14"],\
+          ["reflect-metadata", "npm:0.2.1"],\
           ["rxjs", "npm:7.8.1"],\
           ["source-map-support", "npm:0.5.21"],\
           ["supertest", "npm:6.3.4"],\
@@ -635,7 +635,7 @@ const RAW_RUNTIME_STATE =
           ["class-transformer", null],\
           ["class-validator", null],\
           ["iterare", "npm:1.2.1"],\
-          ["reflect-metadata", "npm:0.1.14"],\
+          ["reflect-metadata", "npm:0.2.1"],\
           ["rxjs", "npm:7.8.1"],\
           ["tslib", "npm:2.6.2"],\
           ["uid", "npm:2.0.2"]\
@@ -709,7 +709,7 @@ const RAW_RUNTIME_STATE =
           ["fast-safe-stringify", "npm:2.1.1"],\
           ["iterare", "npm:1.2.1"],\
           ["path-to-regexp", "npm:3.2.0"],\
-          ["reflect-metadata", "npm:0.1.14"],\
+          ["reflect-metadata", "npm:0.2.1"],\
           ["rxjs", "npm:7.8.1"],\
           ["tslib", "npm:2.6.2"],\
           ["uid", "npm:2.0.2"]\
@@ -774,7 +774,7 @@ const RAW_RUNTIME_STATE =
           ["@types/reflect-metadata", null],\
           ["class-transformer", null],\
           ["class-validator", null],\
-          ["reflect-metadata", "npm:0.1.14"]\
+          ["reflect-metadata", "npm:0.2.1"]\
         ],\
         "packagePeers": [\
           "@nestjs/common",\
@@ -885,7 +885,7 @@ const RAW_RUNTIME_STATE =
           ["js-yaml", "npm:4.1.0"],\
           ["lodash", "npm:4.17.21"],\
           ["path-to-regexp", "npm:3.2.0"],\
-          ["reflect-metadata", "npm:0.1.14"],\
+          ["reflect-metadata", "npm:0.2.1"],\
           ["swagger-ui-dist", "npm:5.11.2"]\
         ],\
         "packagePeers": [\
@@ -5291,10 +5291,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["reflect-metadata", [\
-      ["npm:0.1.14", {\
-        "packageLocation": "./.yarn/cache/reflect-metadata-npm-0.1.14-b105eed5b2-fcab9c17ec.zip/node_modules/reflect-metadata/",\
+      ["npm:0.2.1", {\
+        "packageLocation": "./.yarn/cache/reflect-metadata-npm-0.2.1-7f12b5924d-394b293bd4.zip/node_modules/reflect-metadata/",\
         "packageDependencies": [\
-          ["reflect-metadata", "npm:0.1.14"]\
+          ["reflect-metadata", "npm:0.2.1"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -6416,7 +6416,7 @@ const RAW_RUNTIME_STATE =
           ["fastify", "npm:4.26.1"],\
           ["mongoose", "npm:8.1.3"],\
           ["prettier", "npm:3.2.5"],\
-          ["reflect-metadata", "npm:0.1.14"],\
+          ["reflect-metadata", "npm:0.2.1"],\
           ["rxjs", "npm:7.8.1"],\
           ["source-map-support", "npm:0.5.21"],\
           ["supertest", "npm:6.3.4"],\
