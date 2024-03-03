@@ -43,7 +43,7 @@ const RAW_RUNTIME_STATE =
           ["eslint", "npm:8.56.0"],\
           ["eslint-config-prettier", "virtual:62fa41214b9c8dbcdb508a2a19c37c17f0c048c6d8933771f789f85f556f7da6cb5b681860c25c3ddc2b1ce9a327202a9ba19aefdb0850745e4add0f179a6b15#npm:9.1.0"],\
           ["eslint-plugin-prettier", "virtual:62fa41214b9c8dbcdb508a2a19c37c17f0c048c6d8933771f789f85f556f7da6cb5b681860c25c3ddc2b1ce9a327202a9ba19aefdb0850745e4add0f179a6b15#npm:5.1.3"],\
-          ["fastify", "npm:4.26.1"],\
+          ["fastify", "npm:4.26.2"],\
           ["mongoose", "npm:8.1.3"],\
           ["prettier", "npm:3.2.5"],\
           ["reflect-metadata", "npm:0.2.1"],\
@@ -3055,10 +3055,10 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "HARD"\
       }],\
-      ["npm:4.26.1", {\
-        "packageLocation": "./.yarn/cache/fastify-npm-4.26.1-08dd789c15-010cc9bd21.zip/node_modules/fastify/",\
+      ["npm:4.26.2", {\
+        "packageLocation": "./.yarn/cache/fastify-npm-4.26.2-008606c910-24ee6b1496.zip/node_modules/fastify/",\
         "packageDependencies": [\
-          ["fastify", "npm:4.26.1"],\
+          ["fastify", "npm:4.26.2"],\
           ["@fastify/ajv-compiler", "npm:3.5.0"],\
           ["@fastify/error", "npm:3.4.1"],\
           ["@fastify/fast-json-stringify-compiler", "npm:4.3.0"],\
@@ -6393,7 +6393,7 @@ const RAW_RUNTIME_STATE =
           ["eslint", "npm:8.56.0"],\
           ["eslint-config-prettier", "virtual:62fa41214b9c8dbcdb508a2a19c37c17f0c048c6d8933771f789f85f556f7da6cb5b681860c25c3ddc2b1ce9a327202a9ba19aefdb0850745e4add0f179a6b15#npm:9.1.0"],\
           ["eslint-plugin-prettier", "virtual:62fa41214b9c8dbcdb508a2a19c37c17f0c048c6d8933771f789f85f556f7da6cb5b681860c25c3ddc2b1ce9a327202a9ba19aefdb0850745e4add0f179a6b15#npm:5.1.3"],\
-          ["fastify", "npm:4.26.1"],\
+          ["fastify", "npm:4.26.2"],\
           ["mongoose", "npm:8.1.3"],\
           ["prettier", "npm:3.2.5"],\
           ["reflect-metadata", "npm:0.2.1"],\
