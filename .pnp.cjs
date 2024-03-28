@@ -44,7 +44,7 @@ const RAW_RUNTIME_STATE =
           ["eslint-config-prettier", "virtual:62fa41214b9c8dbcdb508a2a19c37c17f0c048c6d8933771f789f85f556f7da6cb5b681860c25c3ddc2b1ce9a327202a9ba19aefdb0850745e4add0f179a6b15#npm:9.1.0"],\
           ["eslint-plugin-prettier", "virtual:62fa41214b9c8dbcdb508a2a19c37c17f0c048c6d8933771f789f85f556f7da6cb5b681860c25c3ddc2b1ce9a327202a9ba19aefdb0850745e4add0f179a6b15#npm:5.1.3"],\
           ["fastify", "npm:4.26.1"],\
-          ["mongoose", "npm:8.1.3"],\
+          ["mongoose", "npm:8.2.4"],\
           ["prettier", "npm:3.2.5"],\
           ["reflect-metadata", "npm:0.2.1"],\
           ["rxjs", "npm:7.8.1"],\
@@ -4554,10 +4554,10 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:6b4863bfae62929b99af3336f22e77406e05a803cac82bbdb1c7bf9f349a06f1a014dfa887c4dc40c5b33dc5ddf9a25eda64ce37d17f13c146decf413a01d56c#npm:6.3.0", {\
-        "packageLocation": "./.yarn/__virtual__/mongodb-virtual-8526e6cee7/0/cache/mongodb-npm-6.3.0-28854d0f74-3b52734e64.zip/node_modules/mongodb/",\
+      ["virtual:33b4a11176da434493ab30cb107c8184e30e1d6ca430d1acf90f6b2cd30563df41282f1e6472579913675f6ed49506916e8c02f1d8453cafcc509241acb225a8#npm:6.3.0", {\
+        "packageLocation": "./.yarn/__virtual__/mongodb-virtual-6128b94f40/0/cache/mongodb-npm-6.3.0-28854d0f74-3b52734e64.zip/node_modules/mongodb/",\
         "packageDependencies": [\
-          ["mongodb", "virtual:6b4863bfae62929b99af3336f22e77406e05a803cac82bbdb1c7bf9f349a06f1a014dfa887c4dc40c5b33dc5ddf9a25eda64ce37d17f13c146decf413a01d56c#npm:6.3.0"],\
+          ["mongodb", "virtual:33b4a11176da434493ab30cb107c8184e30e1d6ca430d1acf90f6b2cd30563df41282f1e6472579913675f6ed49506916e8c02f1d8453cafcc509241acb225a8#npm:6.3.0"],\
           ["@aws-sdk/credential-providers", null],\
           ["@mongodb-js/saslprep", "npm:1.1.4"],\
           ["@mongodb-js/zstd", null],\
@@ -4607,13 +4607,13 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["mongoose", [\
-      ["npm:8.1.3", {\
-        "packageLocation": "./.yarn/cache/mongoose-npm-8.1.3-6b4863bfae-39fc65c0c6.zip/node_modules/mongoose/",\
+      ["npm:8.2.4", {\
+        "packageLocation": "./.yarn/cache/mongoose-npm-8.2.4-33b4a11176-69cea44983.zip/node_modules/mongoose/",\
         "packageDependencies": [\
-          ["mongoose", "npm:8.1.3"],\
+          ["mongoose", "npm:8.2.4"],\
           ["bson", "npm:6.3.0"],\
           ["kareem", "npm:2.5.1"],\
-          ["mongodb", "virtual:6b4863bfae62929b99af3336f22e77406e05a803cac82bbdb1c7bf9f349a06f1a014dfa887c4dc40c5b33dc5ddf9a25eda64ce37d17f13c146decf413a01d56c#npm:6.3.0"],\
+          ["mongodb", "virtual:33b4a11176da434493ab30cb107c8184e30e1d6ca430d1acf90f6b2cd30563df41282f1e6472579913675f6ed49506916e8c02f1d8453cafcc509241acb225a8#npm:6.3.0"],\
           ["mpath", "npm:0.9.0"],\
           ["mquery", "npm:5.0.0"],\
           ["ms", "npm:2.1.3"],\
@@ -6394,7 +6394,7 @@ const RAW_RUNTIME_STATE =
           ["eslint-config-prettier", "virtual:62fa41214b9c8dbcdb508a2a19c37c17f0c048c6d8933771f789f85f556f7da6cb5b681860c25c3ddc2b1ce9a327202a9ba19aefdb0850745e4add0f179a6b15#npm:9.1.0"],\
           ["eslint-plugin-prettier", "virtual:62fa41214b9c8dbcdb508a2a19c37c17f0c048c6d8933771f789f85f556f7da6cb5b681860c25c3ddc2b1ce9a327202a9ba19aefdb0850745e4add0f179a6b15#npm:5.1.3"],\
           ["fastify", "npm:4.26.1"],\
-          ["mongoose", "npm:8.1.3"],\
+          ["mongoose", "npm:8.2.4"],\
           ["prettier", "npm:3.2.5"],\
           ["reflect-metadata", "npm:0.2.1"],\
           ["rxjs", "npm:7.8.1"],\
