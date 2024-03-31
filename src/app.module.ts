@@ -2,9 +2,10 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 
 import { AppController } from './app.controller';
+import { RepositoryModule } from './common/repository/repository.module';
 
 import { AuthModule } from './auth/auth.module';
-import { RepositoryModule } from './common/repository/repository.module';
+import { ClientModule } from './client/client.module';
 import { ArtistModule } from './artist/artist.module';
 import { ChartsModule } from './charts/charts.module';
 import { LyricsModule } from './lyrics/lyrics.module';
@@ -18,12 +19,14 @@ import { SongsModule } from './songs/songs.module';
       envFilePath: ['.env.development', '.env'],
     }),
     AuthModule,
+    ClientModule,
     ArtistModule,
     ChartsModule,
     LyricsModule,
     MypageModule,
     SongsModule,
     RepositoryModule,
+    AppModule,
   ],
   controllers: [AppController],
 })

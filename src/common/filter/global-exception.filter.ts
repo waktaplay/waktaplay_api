@@ -17,6 +17,8 @@ export class GlobalExceptionFilter implements ExceptionFilter {
     const ctx = host.switchToHttp();
     const response: FastifyReply<any> = ctx.getResponse<FastifyReply>();
 
+    const responseAt: string = new Date().toISOString();
+
     let status: HttpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
     let message: string | object | APIException =
       '내부 서버 오류가 발생했습니다.';
@@ -24,17 +26,16 @@ export class GlobalExceptionFilter implements ExceptionFilter {
     if (exception instanceof HttpException) {
       status = exception.getStatus();
       message = exception.getResponse();
-    } else if (exception instanceof APIException) {
-      status = exception.status;
-      message = exception;
     }
 
-    if (message instanceof APIException) {
-      response.status(status).send({
-        code: HttpStatus[message.status],
-        status: message.status,
-        message: message.message,
-        data: message.data,
+    if (exception instanceof APIException) {
+      response.status(exception.status).send({
+        code: HttpStatus[exception.status],
+        status: exception.status,
+
+        data: exception.data,
+        message: exception.message,
+        responseAt: responseAt,
       });
       return;
     }
@@ -42,7 +43,9 @@ export class GlobalExceptionFilter implements ExceptionFilter {
     response.status(status).send({
       code: HttpStatus[status],
       status: status,
+
       message: message['message'] || message['error'] || message,
+      responseAt: responseAt,
     });
   }
 }
