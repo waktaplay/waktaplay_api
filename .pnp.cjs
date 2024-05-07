@@ -26,7 +26,7 @@ const RAW_RUNTIME_STATE =
       [null, {\
         "packageLocation": "./",\
         "packageDependencies": [\
-          ["@fastify/static", "npm:7.0.1"],\
+          ["@fastify/static", "npm:7.0.4"],\
           ["@nestjs/axios", "virtual:62fa41214b9c8dbcdb508a2a19c37c17f0c048c6d8933771f789f85f556f7da6cb5b681860c25c3ddc2b1ce9a327202a9ba19aefdb0850745e4add0f179a6b15#npm:3.0.2"],\
           ["@nestjs/cli", "virtual:62fa41214b9c8dbcdb508a2a19c37c17f0c048c6d8933771f789f85f556f7da6cb5b681860c25c3ddc2b1ce9a327202a9ba19aefdb0850745e4add0f179a6b15#npm:10.3.2"],\
           ["@nestjs/common", "virtual:62fa41214b9c8dbcdb508a2a19c37c17f0c048c6d8933771f789f85f556f7da6cb5b681860c25c3ddc2b1ce9a327202a9ba19aefdb0850745e4add0f179a6b15#npm:10.3.3"],\
@@ -353,10 +353,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@fastify/static", [\
-      ["npm:7.0.1", {\
-        "packageLocation": "./.yarn/cache/@fastify-static-npm-7.0.1-4a65f7aceb-61886e2d12.zip/node_modules/@fastify/static/",\
+      ["npm:7.0.4", {\
+        "packageLocation": "./.yarn/cache/@fastify-static-npm-7.0.4-b0d1d7cdf2-9471ff60df.zip/node_modules/@fastify/static/",\
         "packageDependencies": [\
-          ["@fastify/static", "npm:7.0.1"],\
+          ["@fastify/static", "npm:7.0.4"],\
           ["@fastify/accept-negotiator", "npm:1.1.0"],\
           ["@fastify/send", "npm:2.1.0"],\
           ["content-disposition", "npm:0.5.4"],\
@@ -804,7 +804,7 @@ const RAW_RUNTIME_STATE =
           ["@fastify/cors", "npm:9.0.1"],\
           ["@fastify/formbody", "npm:7.4.0"],\
           ["@fastify/middie", "npm:8.3.0"],\
-          ["@fastify/static", "npm:7.0.1"],\
+          ["@fastify/static", "npm:7.0.4"],\
           ["@fastify/view", null],\
           ["@nestjs/common", "virtual:62fa41214b9c8dbcdb508a2a19c37c17f0c048c6d8933771f789f85f556f7da6cb5b681860c25c3ddc2b1ce9a327202a9ba19aefdb0850745e4add0f179a6b15#npm:10.3.3"],\
           ["@nestjs/core", "virtual:62fa41214b9c8dbcdb508a2a19c37c17f0c048c6d8933771f789f85f556f7da6cb5b681860c25c3ddc2b1ce9a327202a9ba19aefdb0850745e4add0f179a6b15#npm:10.3.3"],\
@@ -869,7 +869,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/__virtual__/@nestjs-swagger-virtual-972469a323/0/cache/@nestjs-swagger-npm-7.3.0-7221445718-27efa3e5d1.zip/node_modules/@nestjs/swagger/",\
         "packageDependencies": [\
           ["@nestjs/swagger", "virtual:62fa41214b9c8dbcdb508a2a19c37c17f0c048c6d8933771f789f85f556f7da6cb5b681860c25c3ddc2b1ce9a327202a9ba19aefdb0850745e4add0f179a6b15#npm:7.3.0"],\
-          ["@fastify/static", "npm:7.0.1"],\
+          ["@fastify/static", "npm:7.0.4"],\
           ["@microsoft/tsdoc", "npm:0.14.2"],\
           ["@nestjs/common", "virtual:62fa41214b9c8dbcdb508a2a19c37c17f0c048c6d8933771f789f85f556f7da6cb5b681860c25c3ddc2b1ce9a327202a9ba19aefdb0850745e4add0f179a6b15#npm:10.3.3"],\
           ["@nestjs/core", "virtual:62fa41214b9c8dbcdb508a2a19c37c17f0c048c6d8933771f789f85f556f7da6cb5b681860c25c3ddc2b1ce9a327202a9ba19aefdb0850745e4add0f179a6b15#npm:10.3.3"],\
@@ -6376,7 +6376,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./",\
         "packageDependencies": [\
           ["waktaplay_api", "workspace:."],\
-          ["@fastify/static", "npm:7.0.1"],\
+          ["@fastify/static", "npm:7.0.4"],\
           ["@nestjs/axios", "virtual:62fa41214b9c8dbcdb508a2a19c37c17f0c048c6d8933771f789f85f556f7da6cb5b681860c25c3ddc2b1ce9a327202a9ba19aefdb0850745e4add0f179a6b15#npm:3.0.2"],\
           ["@nestjs/cli", "virtual:62fa41214b9c8dbcdb508a2a19c37c17f0c048c6d8933771f789f85f556f7da6cb5b681860c25c3ddc2b1ce9a327202a9ba19aefdb0850745e4add0f179a6b15#npm:10.3.2"],\
           ["@nestjs/common", "virtual:62fa41214b9c8dbcdb508a2a19c37c17f0c048c6d8933771f789f85f556f7da6cb5b681860c25c3ddc2b1ce9a327202a9ba19aefdb0850745e4add0f179a6b15#npm:10.3.3"],\
