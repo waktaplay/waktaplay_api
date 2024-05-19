@@ -74,11 +74,10 @@ export class SongsService {
 
       // artTrack이 0이나 빈 문자열로 날라오는 경우 대비
       music.videos.artTrack =
-        music.videos.artTrack === '0' ||
-        music.videos.artTrack === ''
+        music.videos.artTrack === '0' || music.videos.artTrack === ''
           ? null
           : music.videos.artTrack;
-  
+
       // 장르, 키워드가 빈 문자열로 날라오는 경우 대비
       music.genres = music.genres.filter((g) => g !== '');
       music.keywords = music.keywords.filter((k) => k !== '');
