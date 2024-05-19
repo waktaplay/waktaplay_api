@@ -25,7 +25,7 @@ export class SongsService {
 
     const musicResponse = await this.musicModel
       .findOne({ id })
-      .select('-_id -__v -artist');
+      .select('-_id -__v -artist -videos.reaction -videos.etc');
 
     if (!musicResponse) {
       throw new APIException(
@@ -60,17 +60,28 @@ export class SongsService {
     };
   }
 
-  async getTracksMany(limit: number = -1): Promise<musicDetailDto[]> {
+  async getTracksMany(limit?: number): Promise<musicDetailDto[]> {
     const musicResponse = await this.musicModel
       .find()
       .sort({ uploadDate: -1 })
-      .select('-_id -__v -artist')
-      .limit(limit);
+      .select('-_id -__v -artist -videos.reaction -videos.etc')
+      .limit(limit || undefined);
 
     const heartsResponse = await this.heartsModel.find();
 
     return musicResponse.map((music) => {
       const hearts = heartsResponse.filter((heart) => heart.music === music.id);
+
+      // artTrack이 0이나 빈 문자열로 날라오는 경우 대비
+      music.videos.artTrack =
+        music.videos.artTrack === '0' ||
+        music.videos.artTrack === ''
+          ? null
+          : music.videos.artTrack;
+  
+      // 장르, 키워드가 빈 문자열로 날라오는 경우 대비
+      music.genres = music.genres.filter((g) => g !== '');
+      music.keywords = music.keywords.filter((k) => k !== '');
 
       return {
         ...SerializeJson.serialize<IMusic>(music),
