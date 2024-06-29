@@ -43,7 +43,7 @@ const RAW_RUNTIME_STATE =
           ["eslint", "npm:8.56.0"],\
           ["eslint-config-prettier", "virtual:62fa41214b9c8dbcdb508a2a19c37c17f0c048c6d8933771f789f85f556f7da6cb5b681860c25c3ddc2b1ce9a327202a9ba19aefdb0850745e4add0f179a6b15#npm:9.1.0"],\
           ["eslint-plugin-prettier", "virtual:62fa41214b9c8dbcdb508a2a19c37c17f0c048c6d8933771f789f85f556f7da6cb5b681860c25c3ddc2b1ce9a327202a9ba19aefdb0850745e4add0f179a6b15#npm:5.1.3"],\
-          ["fastify", "npm:4.26.1"],\
+          ["fastify", "npm:4.28.1"],\
           ["mongoose", "npm:8.1.3"],\
           ["prettier", "npm:3.2.5"],\
           ["reflect-metadata", "npm:0.2.1"],\
@@ -3055,10 +3055,10 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "HARD"\
       }],\
-      ["npm:4.26.1", {\
-        "packageLocation": "./.yarn/cache/fastify-npm-4.26.1-08dd789c15-010cc9bd21.zip/node_modules/fastify/",\
+      ["npm:4.28.1", {\
+        "packageLocation": "./.yarn/cache/fastify-npm-4.28.1-b5ef7d871c-8a749dd540.zip/node_modules/fastify/",\
         "packageDependencies": [\
-          ["fastify", "npm:4.26.1"],\
+          ["fastify", "npm:4.28.1"],\
           ["@fastify/ajv-compiler", "npm:3.5.0"],\
           ["@fastify/error", "npm:3.4.1"],\
           ["@fastify/fast-json-stringify-compiler", "npm:4.3.0"],\
@@ -3068,7 +3068,7 @@ const RAW_RUNTIME_STATE =
           ["fast-json-stringify", "npm:5.12.0"],\
           ["find-my-way", "npm:8.1.0"],\
           ["light-my-request", "npm:5.11.0"],\
-          ["pino", "npm:8.19.0"],\
+          ["pino", "npm:9.2.0"],\
           ["process-warning", "npm:3.0.0"],\
           ["proxy-addr", "npm:2.0.7"],\
           ["rfdc", "npm:1.3.1"],\
@@ -5046,6 +5046,24 @@ const RAW_RUNTIME_STATE =
           ["thread-stream", "npm:2.4.1"]\
         ],\
         "linkType": "HARD"\
+      }],\
+      ["npm:9.2.0", {\
+        "packageLocation": "./.yarn/cache/pino-npm-9.2.0-dc3662cd9b-7d8db2228a.zip/node_modules/pino/",\
+        "packageDependencies": [\
+          ["pino", "npm:9.2.0"],\
+          ["atomic-sleep", "npm:1.0.0"],\
+          ["fast-redact", "npm:3.3.0"],\
+          ["on-exit-leak-free", "npm:2.1.2"],\
+          ["pino-abstract-transport", "npm:1.2.0"],\
+          ["pino-std-serializers", "npm:7.0.0"],\
+          ["process-warning", "npm:3.0.0"],\
+          ["quick-format-unescaped", "npm:4.0.4"],\
+          ["real-require", "npm:0.2.0"],\
+          ["safe-stable-stringify", "npm:2.4.3"],\
+          ["sonic-boom", "npm:4.0.1"],\
+          ["thread-stream", "npm:3.1.0"]\
+        ],\
+        "linkType": "HARD"\
       }]\
     ]],\
     ["pino-abstract-transport", [\
@@ -5057,6 +5075,15 @@ const RAW_RUNTIME_STATE =
           ["split2", "npm:4.2.0"]\
         ],\
         "linkType": "HARD"\
+      }],\
+      ["npm:1.2.0", {\
+        "packageLocation": "./.yarn/cache/pino-abstract-transport-npm-1.2.0-8567d0d819-6ec1d19a7f.zip/node_modules/pino-abstract-transport/",\
+        "packageDependencies": [\
+          ["pino-abstract-transport", "npm:1.2.0"],\
+          ["readable-stream", "npm:4.5.2"],\
+          ["split2", "npm:4.2.0"]\
+        ],\
+        "linkType": "HARD"\
       }]\
     ]],\
     ["pino-std-serializers", [\
@@ -5064,6 +5091,13 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/pino-std-serializers-npm-6.2.2-0e907a1130-a00cdff4e1.zip/node_modules/pino-std-serializers/",\
         "packageDependencies": [\
           ["pino-std-serializers", "npm:6.2.2"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:7.0.0", {\
+        "packageLocation": "./.yarn/cache/pino-std-serializers-npm-7.0.0-94d470ae0c-884e08f65a.zip/node_modules/pino-std-serializers/",\
+        "packageDependencies": [\
+          ["pino-std-serializers", "npm:7.0.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -5648,6 +5682,14 @@ const RAW_RUNTIME_STATE =
           ["atomic-sleep", "npm:1.0.0"]\
         ],\
         "linkType": "HARD"\
+      }],\
+      ["npm:4.0.1", {\
+        "packageLocation": "./.yarn/cache/sonic-boom-npm-4.0.1-75945120ed-449bdc39f4.zip/node_modules/sonic-boom/",\
+        "packageDependencies": [\
+          ["sonic-boom", "npm:4.0.1"],\
+          ["atomic-sleep", "npm:1.0.0"]\
+        ],\
+        "linkType": "HARD"\
       }]\
     ]],\
     ["source-map", [\
@@ -6006,6 +6048,14 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/thread-stream-npm-2.4.1-3f89bca0b7-baac5bf555.zip/node_modules/thread-stream/",\
         "packageDependencies": [\
           ["thread-stream", "npm:2.4.1"],\
+          ["real-require", "npm:0.2.0"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:3.1.0", {\
+        "packageLocation": "./.yarn/cache/thread-stream-npm-3.1.0-ac5663dfb7-ea2d816c4f.zip/node_modules/thread-stream/",\
+        "packageDependencies": [\
+          ["thread-stream", "npm:3.1.0"],\
           ["real-require", "npm:0.2.0"]\
         ],\
         "linkType": "HARD"\
@@ -6393,7 +6443,7 @@ const RAW_RUNTIME_STATE =
           ["eslint", "npm:8.56.0"],\
           ["eslint-config-prettier", "virtual:62fa41214b9c8dbcdb508a2a19c37c17f0c048c6d8933771f789f85f556f7da6cb5b681860c25c3ddc2b1ce9a327202a9ba19aefdb0850745e4add0f179a6b15#npm:9.1.0"],\
           ["eslint-plugin-prettier", "virtual:62fa41214b9c8dbcdb508a2a19c37c17f0c048c6d8933771f789f85f556f7da6cb5b681860c25c3ddc2b1ce9a327202a9ba19aefdb0850745e4add0f179a6b15#npm:5.1.3"],\
-          ["fastify", "npm:4.26.1"],\
+          ["fastify", "npm:4.28.1"],\
           ["mongoose", "npm:8.1.3"],\
           ["prettier", "npm:3.2.5"],\
           ["reflect-metadata", "npm:0.2.1"],\
