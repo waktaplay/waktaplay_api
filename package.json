@@ -63,5 +63,5 @@
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
   },
-  "packageManager": "yarn@4.1.0"
+  "packageManager": "yarn@4.4.0"
 }
