@@ -36,7 +36,7 @@ const RAW_RUNTIME_STATE =
           ["@nestjs/platform-fastify", "virtual:62fa41214b9c8dbcdb508a2a19c37c17f0c048c6d8933771f789f85f556f7da6cb5b681860c25c3ddc2b1ce9a327202a9ba19aefdb0850745e4add0f179a6b15#npm:10.3.3"],\
           ["@nestjs/schematics", "virtual:62fa41214b9c8dbcdb508a2a19c37c17f0c048c6d8933771f789f85f556f7da6cb5b681860c25c3ddc2b1ce9a327202a9ba19aefdb0850745e4add0f179a6b15#npm:10.1.1"],\
           ["@nestjs/swagger", "virtual:62fa41214b9c8dbcdb508a2a19c37c17f0c048c6d8933771f789f85f556f7da6cb5b681860c25c3ddc2b1ce9a327202a9ba19aefdb0850745e4add0f179a6b15#npm:7.3.0"],\
-          ["@types/node", "npm:20.11.19"],\
+          ["@types/node", "npm:20.16.1"],\
           ["@typescript-eslint/eslint-plugin", "virtual:62fa41214b9c8dbcdb508a2a19c37c17f0c048c6d8933771f789f85f556f7da6cb5b681860c25c3ddc2b1ce9a327202a9ba19aefdb0850745e4add0f179a6b15#npm:7.0.2"],\
           ["@typescript-eslint/parser", "virtual:62fa41214b9c8dbcdb508a2a19c37c17f0c048c6d8933771f789f85f556f7da6cb5b681860c25c3ddc2b1ce9a327202a9ba19aefdb0850745e4add0f179a6b15#npm:7.0.2"],\
           ["axios", "npm:1.6.7"],\
@@ -1071,17 +1071,25 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/@types-jsonwebtoken-npm-9.0.5-523ec98552-4849312946.zip/node_modules/@types/jsonwebtoken/",\
         "packageDependencies": [\
           ["@types/jsonwebtoken", "npm:9.0.5"],\
-          ["@types/node", "npm:20.11.19"]\
+          ["@types/node", "npm:22.4.1"]\
         ],\
         "linkType": "HARD"\
       }]\
     ]],\
     ["@types/node", [\
-      ["npm:20.11.19", {\
-        "packageLocation": "./.yarn/cache/@types-node-npm-20.11.19-5d4958999b-c7f4705d6c.zip/node_modules/@types/node/",\
+      ["npm:20.16.1", {\
+        "packageLocation": "./.yarn/cache/@types-node-npm-20.16.1-ba5fb07db1-9bae1dffd2.zip/node_modules/@types/node/",\
         "packageDependencies": [\
-          ["@types/node", "npm:20.11.19"],\
-          ["undici-types", "npm:5.26.5"]\
+          ["@types/node", "npm:20.16.1"],\
+          ["undici-types", "npm:6.19.6"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:22.4.1", {\
+        "packageLocation": "./.yarn/cache/@types-node-npm-22.4.1-553ffaf0e5-cce9221aea.zip/node_modules/@types/node/",\
+        "packageDependencies": [\
+          ["@types/node", "npm:22.4.1"],\
+          ["undici-types", "npm:6.19.6"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -3912,7 +3920,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/jest-worker-npm-27.5.1-1c110b5894-06c6e2a845.zip/node_modules/jest-worker/",\
         "packageDependencies": [\
           ["jest-worker", "npm:27.5.1"],\
-          ["@types/node", "npm:20.11.19"],\
+          ["@types/node", "npm:22.4.1"],\
           ["merge-stream", "npm:2.0.0"],\
           ["supports-color", "npm:8.1.1"]\
         ],\
@@ -6168,7 +6176,7 @@ const RAW_RUNTIME_STATE =
           ["@tsconfig/node12", "npm:1.0.11"],\
           ["@tsconfig/node14", "npm:1.0.3"],\
           ["@tsconfig/node16", "npm:1.0.4"],\
-          ["@types/node", "npm:20.11.19"],\
+          ["@types/node", "npm:20.16.1"],\
           ["@types/swc__core", null],\
           ["@types/swc__wasm", null],\
           ["@types/typescript", null],\
@@ -6273,10 +6281,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["undici-types", [\
-      ["npm:5.26.5", {\
-        "packageLocation": "./.yarn/cache/undici-types-npm-5.26.5-de4f7c7bb9-0097779d94.zip/node_modules/undici-types/",\
+      ["npm:6.19.6", {\
+        "packageLocation": "./.yarn/cache/undici-types-npm-6.19.6-9d9ccfb00d-0ea9bc2576.zip/node_modules/undici-types/",\
         "packageDependencies": [\
-          ["undici-types", "npm:5.26.5"]\
+          ["undici-types", "npm:6.19.6"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -6386,7 +6394,7 @@ const RAW_RUNTIME_STATE =
           ["@nestjs/platform-fastify", "virtual:62fa41214b9c8dbcdb508a2a19c37c17f0c048c6d8933771f789f85f556f7da6cb5b681860c25c3ddc2b1ce9a327202a9ba19aefdb0850745e4add0f179a6b15#npm:10.3.3"],\
           ["@nestjs/schematics", "virtual:62fa41214b9c8dbcdb508a2a19c37c17f0c048c6d8933771f789f85f556f7da6cb5b681860c25c3ddc2b1ce9a327202a9ba19aefdb0850745e4add0f179a6b15#npm:10.1.1"],\
           ["@nestjs/swagger", "virtual:62fa41214b9c8dbcdb508a2a19c37c17f0c048c6d8933771f789f85f556f7da6cb5b681860c25c3ddc2b1ce9a327202a9ba19aefdb0850745e4add0f179a6b15#npm:7.3.0"],\
-          ["@types/node", "npm:20.11.19"],\
+          ["@types/node", "npm:20.16.1"],\
           ["@typescript-eslint/eslint-plugin", "virtual:62fa41214b9c8dbcdb508a2a19c37c17f0c048c6d8933771f789f85f556f7da6cb5b681860c25c3ddc2b1ce9a327202a9ba19aefdb0850745e4add0f179a6b15#npm:7.0.2"],\
           ["@typescript-eslint/parser", "virtual:62fa41214b9c8dbcdb508a2a19c37c17f0c048c6d8933771f789f85f556f7da6cb5b681860c25c3ddc2b1ce9a327202a9ba19aefdb0850745e4add0f179a6b15#npm:7.0.2"],\
           ["axios", "npm:1.6.7"],\
