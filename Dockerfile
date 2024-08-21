@@ -1,18 +1,22 @@
-FROM node:20-alpine
+FROM node:20-alpine AS base
 
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable
+
+COPY . /usr/src/app
 WORKDIR /usr/src/app
 
-COPY .yarn ./.yarn
-COPY .yarnrc.yml ./
+FROM base AS prod-deps
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --prod --frozen-lockfile
 
-COPY package.json ./
-COPY yarn.lock ./
+FROM base AS build
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
+RUN pnpm run build
 
-RUN yarn install --immutable
-
-COPY . .
-
-RUN yarn build
+FROM base
+COPY --from=prod-deps /usr/src/app/node_modules /usr/src/app/node_modules
+COPY --from=build /usr/src/app/dist /usr/src/app/dist
 
 EXPOSE 4000
-CMD [ "yarn", "node", "dist/src/main.js" ]
+CMD [ "node", "dist/src/main.js" ]

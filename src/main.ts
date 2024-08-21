@@ -1,9 +1,13 @@
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import { NestjsRedoxModule } from 'nestjs-redox';
+
 import {
   FastifyAdapter,
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
+
+import fastifyCsrf from '@fastify/csrf-protection';
 
 import { AppModule } from './app.module';
 import { version } from '../package.json';
@@ -17,6 +21,7 @@ async function bootstrap() {
     new FastifyAdapter({ logger: true }),
   );
 
+  //#region -- OpenAPI Spec 설정
   if (process.env.ENABLE_SWAGGER !== '0') {
     const config = new DocumentBuilder()
       .setTitle('WAKTAPLAY Music API')
@@ -26,9 +31,13 @@ async function bootstrap() {
       .build();
 
     const document = SwaggerModule.createDocument(app, config);
-    await SwaggerModule.setup('docs', app, document);
-  }
 
+    await SwaggerModule.setup('docs', app, document);
+    await NestjsRedoxModule.setup('redoc', app, document);
+  }
+  //#endregion
+
+  //#region -- CORS + CSRF 설정
   if (process.env.GLOBAL_CORS === '1') {
     app.enableCors({
       origin: '*',
@@ -40,6 +49,11 @@ async function bootstrap() {
       // credentials: true,
     });
   }
+
+  await app.register(fastifyCsrf, {
+    sessionPlugin: '@fastify/secure-session',
+  });
+  //#endregion
 
   app.useGlobalFilters(new GlobalExceptionFilter());
   app.useGlobalInterceptors(new TransformInterceptor());
