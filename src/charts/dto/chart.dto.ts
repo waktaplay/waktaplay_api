@@ -21,10 +21,10 @@ class ChartData extends musicDetailDto {
     views: number;
 
     /**
-     * 조회수 증감량
-     * @example NEW
+     * 조회수 증감량 (-1: NEW)
+     * @example -1
      */
-    rank: number | 'NEW';
+    rank: number;
   };
 }
 

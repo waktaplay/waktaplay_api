@@ -44,7 +44,7 @@ export class ChartsService {
 
             return {
               ...music,
-              rank: chart?.[type] || { views: 0, rank: 'NEW' },
+              rank: chart?.[type] || { views: 0, rank: -1 },
             };
           })
           .sort((a, b) => b.rank.views - a.rank.views),

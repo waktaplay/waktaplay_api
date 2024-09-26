@@ -9,8 +9,17 @@ export interface IStatistics {
 }
 
 export type IStatisticData = {
+  /**
+   * 현재 조회수 값
+   * @example 1
+   */
   views: number;
-  rank: number | 'NEW';
+
+  /**
+   * 조회수 증감량
+   * @example -1
+   */
+  rank: number;
 };
 
 export const StatisticsSchema = new mongoose.Schema<IStatistics>({
@@ -26,9 +35,9 @@ export const StatisticsSchema = new mongoose.Schema<IStatistics>({
       default: 0,
     },
     rank: {
-      type: Number || String,
+      type: Number,
       required: true,
-      default: 'NEW',
+      default: -1,
     },
   },
   daily: {
@@ -38,9 +47,9 @@ export const StatisticsSchema = new mongoose.Schema<IStatistics>({
       default: 0,
     },
     rank: {
-      type: Number || String,
+      type: Number,
       required: true,
-      default: 'NEW',
+      default: -1,
     },
   },
   total: {
@@ -50,9 +59,9 @@ export const StatisticsSchema = new mongoose.Schema<IStatistics>({
       default: 0,
     },
     rank: {
-      type: Number || String,
+      type: Number,
       required: true,
-      default: 'NEW',
+      default: -1,
     },
   },
   weekly: {
@@ -62,9 +71,9 @@ export const StatisticsSchema = new mongoose.Schema<IStatistics>({
       default: 0,
     },
     rank: {
-      type: Number || String,
+      type: Number,
       required: true,
-      default: 'NEW',
+      default: -1,
     },
   },
 });

@@ -91,8 +91,17 @@ export class musicDetailDto extends musicDto {
 
 export interface IMusicChart extends musicDetailDto {
   rank: {
-    current: number;
-    increase: number | string;
+    /**
+     * 현재 조회수 값
+     * @example 1
+     */
+    views: number;
+
+    /**
+     * 조회수 증감량
+     * @example -1
+     */
+    rank: number;
   };
 }
 
