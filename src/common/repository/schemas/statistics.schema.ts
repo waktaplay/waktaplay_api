@@ -9,8 +9,8 @@ export interface IStatistics {
 }
 
 export type IStatisticData = {
-  current: number;
-  increase: number;
+  views: number;
+  rank: number | 'NEW';
 };
 
 export const StatisticsSchema = new mongoose.Schema<IStatistics>({
@@ -20,35 +20,51 @@ export const StatisticsSchema = new mongoose.Schema<IStatistics>({
     required: true,
   },
   realtime: {
-    current: {
+    views: {
       type: Number,
       required: true,
       default: 0,
     },
-    increase: Number || null,
+    rank: {
+      type: Number || String,
+      required: true,
+      default: 'NEW',
+    },
   },
   daily: {
-    current: {
+    views: {
       type: Number,
       required: true,
       default: 0,
     },
-    increase: Number || null,
+    rank: {
+      type: Number || String,
+      required: true,
+      default: 'NEW',
+    },
   },
   total: {
-    current: {
+    views: {
       type: Number,
       required: true,
       default: 0,
     },
-    increase: Number || null,
+    rank: {
+      type: Number || String,
+      required: true,
+      default: 'NEW',
+    },
   },
   weekly: {
-    current: {
+    views: {
       type: Number,
       required: true,
       default: 0,
     },
-    increase: Number || null,
+    rank: {
+      type: Number || String,
+      required: true,
+      default: 'NEW',
+    },
   },
 });

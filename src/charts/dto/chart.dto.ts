@@ -18,13 +18,13 @@ class ChartData extends musicDetailDto {
      * 현재 조회수 값
      * @example 1
      */
-    current: number;
+    views: number;
 
     /**
      * 조회수 증감량
      * @example NEW
      */
-    increase: number | string;
+    rank: number | 'NEW';
   };
 }
 

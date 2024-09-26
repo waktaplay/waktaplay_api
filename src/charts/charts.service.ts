@@ -23,12 +23,18 @@ export class ChartsService {
 
   async getChart(type: ChartType = 'realtime'): Promise<chartDto> {
     try {
-      const musicData = await this.trackService.getTracksMany(100);
       const chartData = SerializeJson.serialize<IStatistics[]>(
-        await this.statisticsModel.find(),
+        await this.statisticsModel.find().sort({
+          [`${type}.views`]: -1,
+        }),
       );
       const updatedAt = SerializeJson.serialize<IStatisticsUpdatedAt>(
         await this.statisticsUpdatedAtModel.findOne(),
+      );
+
+      const musicData = await this.trackService.getTracksByIds(
+        // get only first 100 tracks
+        chartData.map((data) => data.id).slice(0, 100),
       );
 
       return {
@@ -38,16 +44,10 @@ export class ChartsService {
 
             return {
               ...music,
-              rank: chart?.[type] || { current: 0, increase: 'NEW' },
+              rank: chart?.[type] || { views: 0, rank: 'NEW' },
             };
           })
-          .sort((a, b) => {
-            if (a.rank.increase === 'NEW') return 1;
-            else if (b.rank.increase === 'NEW') return -1;
-            else if (a.rank.current > b.rank.current) return 1;
-            else if (a.rank.current < b.rank.current) return -1;
-            else return 0;
-          }),
+          .sort((a, b) => b.rank.views - a.rank.views),
         updatedAt: new Date(updatedAt[type]).toISOString(),
       };
     } catch (e) {

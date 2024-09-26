@@ -7,8 +7,6 @@ import {
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
 
-import fastifyCsrf from '@fastify/csrf-protection';
-
 import { AppModule } from './app.module';
 import { version } from '../package.json';
 
@@ -24,8 +22,8 @@ async function bootstrap() {
   //#region -- OpenAPI Spec 설정
   if (process.env.ENABLE_SWAGGER != '0') {
     const config = new DocumentBuilder()
-      .setTitle('WAKTAPLAY Music API')
-      .setDescription('WAKTAPLAY Music 서비스를 위한 백엔드 RestAPI 입니다.')
+      .setTitle('WAKTAPLAY API')
+      .setDescription('WAKTAPLAY 서비스를 위한 백엔드 RestAPI 입니다.')
       .setVersion(version)
       .addBearerAuth()
       .build();
@@ -37,7 +35,7 @@ async function bootstrap() {
   }
   //#endregion
 
-  //#region -- CORS + CSRF 설정
+  //#region -- CORS 설정
   if (process.env.GLOBAL_CORS == '1') {
     app.enableCors({
       origin: '*',
@@ -49,10 +47,6 @@ async function bootstrap() {
       // credentials: true,
     });
   }
-
-  await app.register(fastifyCsrf, {
-    sessionPlugin: '@fastify/secure-session',
-  });
   //#endregion
 
   app.useGlobalFilters(new GlobalExceptionFilter());
